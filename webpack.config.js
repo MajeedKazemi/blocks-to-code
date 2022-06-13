@@ -31,6 +31,9 @@ module.exports = {
     entry: {
         index: './src/index.js',
         loops: './src/loops.js',
+        logic: './src/logic.js',
+        controls: './src/controls.js',
+        variables: './src/variables.js'
     },
     output: {
         path: path.resolve(__dirname, 'build'),

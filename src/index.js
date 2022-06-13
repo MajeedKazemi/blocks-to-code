@@ -24,6 +24,9 @@
 
 import * as Blockly from 'blockly';
 import {loops} from './loops.js' 
+import {logic} from './logic.js'
+import {controls} from './controls.js'
+import {variables} from './variables.js'
 
 document.addEventListener("DOMContentLoaded", function () {
     const workspace = Blockly.inject('blocklyDiv',
@@ -45,3 +48,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 Blockly.defineBlocksWithJsonArray(loops)
+Blockly.defineBlocksWithJsonArray(logic)
+Blockly.defineBlocksWithJsonArray(controls)
+Blockly.defineBlocksWithJsonArray(variables)

@@ -1,4 +1,4 @@
-[  // BEGIN JSON EXTRACT
+export var loops = [  // BEGIN JSON EXTRACT
   // Block for repeat n times (external number).
   {
     "type": "controls_repeat_ext",
@@ -50,7 +50,7 @@
         "type": "field_dropdown",
         "name": "MODE",
         "options": [
-          // ["%{BKY_CONTROLS_WHILEUNTIL_OPERATOR_WHILE}", "WHILE"],
+          ["%{BKY_CONTROLS_WHILEUNTIL_OPERATOR_WHILE}", "WHILE"],
           ["%{BKY_CONTROLS_WHILEUNTIL_OPERATOR_UNTIL}", "UNTIL"]
         ]
       },
