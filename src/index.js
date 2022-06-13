@@ -23,6 +23,7 @@
  */
 
 import * as Blockly from 'blockly';
+import {loops} from './loops.js' 
 
 document.addEventListener("DOMContentLoaded", function () {
     const workspace = Blockly.inject('blocklyDiv',
@@ -40,3 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(code);
     })
 });
+
+
+
+Blockly.defineBlocksWithJsonArray(loops)
