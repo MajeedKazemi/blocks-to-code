@@ -28,11 +28,12 @@
     <div id='blocklyDiv'>
     </div>
 
-    <script type='text/javascript' src='./index.js'></script>
+    <script type='text/javascript' src='./index.js'></script>   
 
     <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
 
         <category name="Input/Output">
+            <block type="text_print"></block>
 
 
         </category>
@@ -61,11 +62,14 @@
         
    
         <category name="Operators">
+            <block type="math_add"></block>
+            <block type="math_subtract"></block>
             <block type="math_arithmetic"></block>
             <block type="logic_compare"></block>
             <block type="logic_operation"></block>
             <block type="logic_negate"></block>
             <block type="logic_boolean"></block>
+            <block type="text_length"></block>
             <block type="text_charAt">
                 <value name="VALUE">
                     <block type="variables_get">

@@ -33,7 +33,9 @@ module.exports = {
         loops: './src/loops.js',
         logic: './src/logic.js',
         controls: './src/controls.js',
-        variables: './src/variables.js'
+        variables: './src/variables.js',
+        inputoutput: './src/inputoutput.js',
+        math: './src/math.js',
     },
     output: {
         path: path.resolve(__dirname, 'build'),
