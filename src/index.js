@@ -23,12 +23,13 @@
  */
 
 import * as Blockly from 'blockly';
-import {loops} from './loops.js' 
-import {logic} from './logic.js'
-import {controls} from './controls.js'
-import {variables} from './variables.js'
-import {inputoutput} from './inputoutput.js'
-import {math} from './math.js'
+import {loops} from './loops.js';
+import {logic} from './logic.js';
+import {controls} from './controls.js';
+import {variables} from './variables.js';
+import {inputoutput} from './inputoutput.js';
+import {math} from './math.js';
+import {event} from './event.js';
 
 document.addEventListener("DOMContentLoaded", function () {
     const workspace = Blockly.inject('blocklyDiv',
@@ -44,6 +45,8 @@ document.addEventListener("DOMContentLoaded", function () {
         alert("Check the console for the generated output.");
         const code = Blockly[lang].workspaceToCode(workspace);
         console.log(code);
+        const F = new Function(code);
+        F();
     })
 });
 
@@ -55,4 +58,4 @@ Blockly.defineBlocksWithJsonArray(controls)
 Blockly.defineBlocksWithJsonArray(variables)
 Blockly.defineBlocksWithJsonArray(inputoutput)
 Blockly.defineBlocksWithJsonArray(math)
-
+Blockly.defineBlocksWithJsonArray(event)

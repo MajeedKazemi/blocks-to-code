@@ -33,12 +33,22 @@
     <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
 
         <category name="Input/Output">
+            <block type="text"></block>
             <block type="text_print"></block>
+            <block type="sensing_askandwait">
+                <value name="TEXT">
+                    <shadow type="text">
+                      <field name="TEXT">What's your name?</field>
+                    </shadow>
+                  </value>
+            </block>
+            <block type="sensing_answer"></block>
+            <block type="text_prompt_ext"></block>
 
 
         </category>
         <category name="Events">
-
+            <block type="event_whenflagclicked"></block>
 
         </category>
 

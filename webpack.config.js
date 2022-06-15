@@ -36,6 +36,7 @@ module.exports = {
         variables: './src/variables.js',
         inputoutput: './src/inputoutput.js',
         math: './src/math.js',
+        event: './src/event.js',
     },
     output: {
         path: path.resolve(__dirname, 'build'),

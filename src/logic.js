@@ -57,24 +57,7 @@ export var logic = [
   "helpUrl": "%{BKY_LOGIC_COMPARE_HELPURL}"
   },
 
-  {
-    'type': 'logic_boolean',
-    'message0': '%1',
-    'args0': [
-      {
-        'type': 'field_dropdown',
-        'name': 'BOOL',
-        'options': [
-          ['%{BKY_LOGIC_BOOLEAN_TRUE}', 'TRUE'],
-          ['%{BKY_LOGIC_BOOLEAN_FALSE}', 'FALSE'],
-        ],
-      },
-    ],
-    'output': 'Boolean',
-    'style': 'logic_blocks',
-    'tooltip': '%{BKY_LOGIC_BOOLEAN_TOOLTIP}',
-    'helpUrl': '%{BKY_LOGIC_BOOLEAN_HELPURL}',
-  },
+  
   // Block for if/elseif/else condition.
   {
     'type': 'controls_if',
