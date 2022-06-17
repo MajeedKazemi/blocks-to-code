@@ -37,32 +37,135 @@ document.addEventListener("DOMContentLoaded", function () {
         "contents": [
           {
             "kind": "category",
+            "name": "Input/Output",
+            "contents": [
+              {
+                "kind": "block",
+                "type": "text",
+              },
+              {
+                "kind": "block",
+                "type": "math_number",
+              },
+              {
+                "kind": "block",
+                "type": "logic_boolean",
+              },
+              {
+                "kind": "block",
+                "type": "text_print",
+              },
+              {
+                "kind": "block",
+                "type": "sensing_askandwait",
+              },
+              {
+                "kind": "block",
+                "type": "sensing_answer",
+              },
+        
+            ]
+          },
+          {
+            "kind": "category",
+            "name": "Events",
+            "contents": [
+              {
+                "kind": "block",
+                "type": "event_whenflagclicked"
+              },
+            ]
+          },
+          {
+            "kind": "category",
             "name": "Control",
             "contents": [
               {
                 "kind": "block",
                 "type": "controls_if"
               },
+              {
+                "kind": "block",
+                "type": "controls_ifelse"
+              },
+              {
+                "kind": "block",
+                "type": "controls_forever"
+              },
+              {
+                "kind": "block",
+                "type": "controls_repeat_ext"
+              },
+              {
+                "kind": "block",
+                "type": "controls_whileUntil"
+              },
+              {
+                "kind": "block",
+                "type": "controls_for"
+              },
             ]
           },
           {
             "kind": "category",
-            "name": "Logic",
+            "name": "Operators",
             "contents": [
               {
                 "kind": "block",
-                "type": "logic_compare"
+                "type": "math_add"
               },
               {
                 "kind": "block",
-                "type": "logic_operation"
+                "type": "math_subtract"
               },
               {
                 "kind": "block",
-                "type": "logic_boolean"
+                "type": "logic_greater"
+              },
+              {
+                "kind": "block",
+                "type": "logic_less"
+              },
+              {
+                "kind": "block",
+                "type": "logic_negate"
+              },
+              {
+                "kind": "block",
+                "type": "text_length"
+              },
+              {
+                "kind": "block",
+                "type": "text_charAt"
+              },
+              {
+                "kind": "block",
+                "type": "text_count"
+              },
+              {
+                "kind": "block",
+                "type": "text_replace"
+              },
+              {
+                "kind": "block",
+                "type": "text_reverse"
               }
             ]
-          }
+          },
+          {
+            "kind": "category",
+            "name": "Variables",
+            "contents": [
+              {
+                "kind": "block",
+                "type": "variables_set"
+              },
+              {
+                "kind": "block",
+                "type": "variables_get"
+              }
+            ]
+          },
         ]
       };
       
