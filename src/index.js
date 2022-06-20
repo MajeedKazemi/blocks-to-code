@@ -30,6 +30,8 @@ import {variables} from './variables.js';
 import {inputoutput} from './inputoutput.js';
 import {math} from './math.js';
 import {event} from './event.js';
+import {ContinuousToolbox, ContinuousFlyout, ContinuousMetrics} from '@blockly/continuous-toolbox';
+
 
 document.addEventListener("DOMContentLoaded", function () {
     var toolbox = {
@@ -171,6 +173,11 @@ document.addEventListener("DOMContentLoaded", function () {
       
     const workspace = Blockly.inject('blocklyDiv',
         {
+            plugins: {
+              'toolbox': ContinuousToolbox,
+              'flyoutsVerticalToolbox': ContinuousFlyout,
+              'metricsManager': ContinuousMetrics,
+            },
             toolbox: toolbox,
             //toolbox: document.getElementById('toolbox'),
             media: 'media/',
