@@ -37,6 +37,7 @@ module.exports = {
         inputoutput: './src/inputoutput.js',
         math: './src/math.js',
         event: './src/event.js',
+        toolbox: './src/toolbox.js'
     },
     output: {
         path: path.resolve(__dirname, 'build'),
