@@ -45,6 +45,72 @@ export var math = [
     "style": "math_blocks",
     "helpUrl": "%{BKY_MATH_ARITHMETIC_HELPURL}",
   },
+  
+  // -------------------- math_multiply --------------------
+  {
+    "type": "math_multiply",
+    "message0": "%1 * %2",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "A",
+        "check": "Number",
+        
+      },
+      {
+        "type": "input_value",
+        "name": "B",
+        "check": "Number",
+      },
+    ],
+    "inputsInline": true,
+    "output": "Number",
+    "style": "math_blocks",
+    "helpUrl": "%{BKY_MATH_ARITHMETIC_HELPURL}",
+  },
+
+  // -------------------- math_divide --------------------
+  {
+    "type": "math_divide",
+    "message0": "%1 / %2",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "A",
+        "check": "Number",
+        
+      },
+      {
+        "type": "input_value",
+        "name": "B",
+        "check": "Number",
+      },
+    ],
+    "inputsInline": true,
+    "output": "Number",
+    "style": "math_blocks",
+    "helpUrl": "%{BKY_MATH_ARITHMETIC_HELPURL}",
+  },
+
+  {
+    "type": "math_random",
+    'message0': 'pick random %1 to %2',
+    'args0': [
+      {
+        'type': 'input_value',
+        'name': 'SUB',
+        'check': 'Number',
+      },
+      {
+        'type': 'input_value',
+        'name': 'TEXT',
+        'check': 'Number',
+      },
+    ],
+    'output': 'Number',
+    'inputsInline': true,
+    'style': 'math_blocks',
+  }
 
 ]
 

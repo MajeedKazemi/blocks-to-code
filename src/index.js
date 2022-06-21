@@ -32,6 +32,7 @@ import {math} from './math.js';
 import {event} from './event.js';
 import {ContinuousToolbox, ContinuousFlyout, ContinuousMetrics} from '@blockly/continuous-toolbox';
 
+Blockly.Msg.MATH_MODULO_TITLE = "%1 mod %2"
 
 document.addEventListener("DOMContentLoaded", function () {
     var toolbox = {
@@ -122,6 +123,18 @@ document.addEventListener("DOMContentLoaded", function () {
               },
               {
                 "kind": "block",
+                "type": "math_multiply"
+              },
+              {
+                "kind": "block",
+                "type": "math_divide"
+              },
+              {
+                "kind": "block",
+                "type": "math_random"
+              },
+              {
+                "kind": "block",
                 "type": "logic_greater"
               },
               {
@@ -130,11 +143,23 @@ document.addEventListener("DOMContentLoaded", function () {
               },
               {
                 "kind": "block",
+                "type": "logic_equal"
+              },
+              {
+                "kind": "block",
+                "type": "logic_op_and"
+              },
+              {
+                "kind": "block",
+                "type": "logic_op_or"
+              },
+              {
+                "kind": "block",
                 "type": "logic_negate"
               },
               {
                 "kind": "block",
-                "type": "text_length"
+                "type": "text_join"
               },
               {
                 "kind": "block",
@@ -142,16 +167,24 @@ document.addEventListener("DOMContentLoaded", function () {
               },
               {
                 "kind": "block",
+                "type": "text_length"
+              },
+              {
+                "kind": "block",
                 "type": "text_count"
               },
               {
                 "kind": "block",
-                "type": "text_replace"
+                "type": "math_modulo"
               },
               {
                 "kind": "block",
-                "type": "text_reverse"
-              }
+                "type": "math_round"
+              },
+              {
+                "kind": "block",
+                "type": "math_single"
+              },
             ]
           },
           {

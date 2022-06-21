@@ -57,6 +57,68 @@ export var logic = [
   "helpUrl": "%{BKY_LOGIC_COMPARE_HELPURL}"
   },
 
+  {"type": "logic_op_and",
+  "message0": "%1 and %2",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "A",
+      'check': 'Boolean',
+    },
+    {
+      "type": "input_value",
+      "name": "B",
+      'check': 'Boolean',
+    }
+  ],
+  "inputsInline": true,
+  "output": "Boolean",
+  "outputShape": Blockly.OUTPUT_SHAPE_HEXAGONAL,
+  "style": "math_blocks",
+  "helpUrl": "%{BKY_LOGIC_COMPARE_HELPURL}"
+  },
+
+  {"type": "logic_op_or",
+  "message0": "%1 or %2",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "A",
+      'check': 'Boolean',
+    },
+    {
+      "type": "input_value",
+      "name": "B",
+      'check': 'Boolean',
+    }
+  ],
+  "inputsInline": true,
+  "output": "Boolean",
+  "outputShape": Blockly.OUTPUT_SHAPE_HEXAGONAL,
+  "style": "math_blocks",
+  "helpUrl": "%{BKY_LOGIC_COMPARE_HELPURL}"
+  },
+
+  {"type": "text_count",
+  "message0": "%1 contains %2 ?",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "A",
+      'check': 'String',
+    },
+    {
+      "type": "input_value",
+      "name": "B",
+      'check': 'String',
+    }
+  ],
+  "inputsInline": true,
+  "output": "Boolean",
+  "outputShape": Blockly.OUTPUT_SHAPE_HEXAGONAL,
+  "style": "math_blocks",
+  "helpUrl": "%{BKY_LOGIC_COMPARE_HELPURL}"
+  },
   
   // Block for if/elseif/else condition.
   {

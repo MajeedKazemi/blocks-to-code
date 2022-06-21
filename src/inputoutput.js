@@ -18,7 +18,6 @@ export var inputoutput = [
     },
 
     {
-
       "type": "sensing_answer",
       "message0": Blockly.Msg.SENSING_ANSWER,
       "checkboxInFlyout": true,
@@ -26,8 +25,48 @@ export var inputoutput = [
       "output": "String",
       "outputShape": Blockly.OUTPUT_SHAPE_ROUND,
       "style": "sensing_blocks"
-    }
-    
+    },
+    {
+      "type": "text_join",
+      'message0': 'join %1 %2',
+      'args0': [
+        {
+          'type': 'input_value',
+          'name': 'A',
+          'check': 'String',
+        },
+        {
+          'type': 'input_value',
+          'name': 'B',
+          'check': 'String',
+        },
+      ],
+      'output': 'String',
+      'inputsInline': true,
+      'style': 'text_blocks',
+    },
+    {
+      'type': 'text_charAt',
+      'message0': 'letter %1 of %2',
+      'args0': [
+        {
+          'type': 'input_value',
+          'name': 'A',
+          'check': 'Number',
+        },
+        {
+          'type': 'input_value',
+          'name': 'B',
+          'check': 'String',
+        },
+  
+      ],
+      'output': 'String',
+      'style': 'text_blocks',
+      'helpUrl': '%{BKY_TEXT_CHARAT_HELPURL}',
+      'inputsInline': true,
+      
+    },
     
 ]
 Blockly.JavaScript['sensing_askandwait'] = function(block) {
@@ -47,4 +86,8 @@ Blockly.JavaScript['sensing_askandwait'] = function(block) {
 Blockly.JavaScript['sensing_answer'] = function(block) {
   var code = 'hidden_var'
   return [code, Blockly.JavaScript.ORDER_ATOMIC];
+}
+
+Blockly.JavaScript['text_charAt'] = function(block) {
+  //asdf
 }
