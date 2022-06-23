@@ -35,7 +35,7 @@ import {ContinuousToolbox, ContinuousFlyout, ContinuousMetrics} from '@blockly/c
 
 
 Blockly.Msg.MATH_MODULO_TITLE = "%1 mod %2"
-
+Blockly.Msg.TEXT_PRINT_TITLE = "say %1"
 
 document.addEventListener("DOMContentLoaded", function () {
       
