@@ -91,3 +91,13 @@ Blockly.JavaScript['sensing_answer'] = function(block) {
 Blockly.JavaScript['text_charAt'] = function(block) {
   //asdf
 }
+
+Blockly.JavaScript['text_print'] = function(block) {
+  const msg = Blockly.JavaScript.valueToCode(block, 'TEXT',
+      Blockly.JavaScript.ORDER_NONE) || "''";
+  return `
+  var divConsole = document.getElementById("console");
+  var content = document.createTextNode(`+msg+`);
+  divConsole.appendChild(content);
+  divConsole.innerHTML += '<br>';`;
+};

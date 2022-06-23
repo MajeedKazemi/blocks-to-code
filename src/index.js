@@ -33,6 +33,12 @@ import {math} from './math.js';
 import {event} from './event.js';
 import {ContinuousToolbox, ContinuousFlyout, ContinuousMetrics} from '@blockly/continuous-toolbox';
 
+function alertConsole(msg, document){
+    var divConsole = document.getElementById("console");
+    var content = document.createTextNode(msg);
+    divConsole.appendChild(content);
+}
+
 Blockly.Msg.MATH_MODULO_TITLE = "%1 mod %2"
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -52,9 +58,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const lang = 'JavaScript';
     const button = document.getElementById('blocklyButton');
     button.addEventListener('click', function () {
-        alert("Check the console for the generated output.");
+        //alert("Check the console for the generated output.");
         const code = Blockly[lang].workspaceToCode(workspace);
+        const divCode = document.getElementById('code');
+        const divConsole = document.getElementById('console');
         console.log(code);
+        divCode.textContent = code;
         const F = new Function(code);
         F();
     })
