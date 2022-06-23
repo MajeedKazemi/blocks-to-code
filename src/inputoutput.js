@@ -14,7 +14,7 @@ export var inputoutput = [
       ],
       "previousStatement": null,
       "nextStatement": null,
-      "style": "sensing_blocks"
+      'style': 'variable_blocks',
     },
 
     {
@@ -24,7 +24,7 @@ export var inputoutput = [
       
       "output": "String",
       "outputShape": Blockly.OUTPUT_SHAPE_ROUND,
-      "style": "sensing_blocks"
+      'style': 'variable_blocks',
     },
     {
       "type": "text_join",
@@ -79,18 +79,7 @@ Blockly.JavaScript['sensing_askandwait'] = function(block) {
     var msg = Blockly.JavaScript.valueToCode(block, 'TEXT',
         Blockly.JavaScript.ORDER_NONE) || '\'\'';
   }
-  var code = `
-  var divInputLabel = document.getElementById("label");
-  divInputLabel.textContent = ` + msg + `;
-  const buttonConfirm = document.getElementById('enter');
-  var hidden_var;
- 
-  setTimeout(function(){
-    hidden_var = document.getElementById('input').value;
-    console.log("done");
-}, 8000);
-  `
-  
+  var code = 'var hidden_var = window.prompt(' + msg + ');\n'
   return code
 }
 

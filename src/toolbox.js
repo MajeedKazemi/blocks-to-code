@@ -66,10 +66,7 @@ export var toolbox = {
             "kind": "block",
             "type": "controls_whileUntil"
           },
-          {
-            "kind": "block",
-            "type": "controls_for"
-          },
+          
         ]
       },
       {
@@ -153,16 +150,7 @@ export var toolbox = {
       {
         "kind": "category",
         "name": "Variables",
-        "contents": [
-          {
-            "kind": "block",
-            "type": "variables_set"
-          },
-          {
-            "kind": "block",
-            "type": "variables_get"
-          }
-        ]
+        "custom": "VARIABLE",
       },
     ]
   };
