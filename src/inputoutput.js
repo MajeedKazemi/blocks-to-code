@@ -79,7 +79,18 @@ Blockly.JavaScript['sensing_askandwait'] = function(block) {
     var msg = Blockly.JavaScript.valueToCode(block, 'TEXT',
         Blockly.JavaScript.ORDER_NONE) || '\'\'';
   }
-  var code = 'var hidden_var = window.prompt(' + msg + ');\n'
+  var code = `
+  var divInputLabel = document.getElementById("label");
+  divInputLabel.textContent = ` + msg + `;
+  const buttonConfirm = document.getElementById('enter');
+  var hidden_var;
+ 
+  setTimeout(function(){
+    hidden_var = document.getElementById('input').value;
+    console.log("done");
+}, 8000);
+  `
+  
   return code
 }
 
