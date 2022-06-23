@@ -43,7 +43,7 @@ export var inputoutput = [
       ],
       'output': 'String',
       'inputsInline': true,
-      'style': 'text_blocks',
+      'style': 'logic_blocks',
     },
     {
       'type': 'text_charAt',
@@ -62,13 +62,14 @@ export var inputoutput = [
   
       ],
       'output': 'String',
-      'style': 'text_blocks',
+      'style': 'logic_blocks',
       'helpUrl': '%{BKY_TEXT_CHARAT_HELPURL}',
       'inputsInline': true,
       
     },
     
 ]
+
 Blockly.JavaScript['sensing_askandwait'] = function(block) {
   // Prompt function.
   if (block.getField('TEXT')) {

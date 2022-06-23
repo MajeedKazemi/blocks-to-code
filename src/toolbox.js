@@ -3,6 +3,7 @@ export var toolbox = {
     "contents": [
       {
         "kind": "category",
+        "colour": "#5CB1D6",
         "name": "Input/Output",
         "contents": [
           {
@@ -34,6 +35,7 @@ export var toolbox = {
       },
       {
         "kind": "category",
+        "colour": "#FFBF00",
         "name": "Events",
         "contents": [
           {
@@ -44,6 +46,7 @@ export var toolbox = {
       },
       {
         "kind": "category",
+        "colour": "#FFAB19",
         "name": "Control",
         "contents": [
           {
@@ -71,6 +74,7 @@ export var toolbox = {
       },
       {
         "kind": "category",
+        "colour": "#59C059",
         "name": "Operators",
         "contents": [
           {
@@ -149,6 +153,7 @@ export var toolbox = {
       },
       {
         "kind": "category",
+        "colour": "#FF8C1A",
         "name": "Variables",
         "custom": "VARIABLE",
       },

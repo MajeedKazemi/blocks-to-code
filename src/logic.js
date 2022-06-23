@@ -15,7 +15,7 @@ export var logic = [
   "inputsInline": true,
   "output": "Boolean",
   "outputShape": Blockly.OUTPUT_SHAPE_HEXAGONAL,
-  "style": "math_blocks",
+  'style': 'logic_blocks',
   "helpUrl": "%{BKY_LOGIC_COMPARE_HELPURL}"
   },
 
@@ -34,7 +34,7 @@ export var logic = [
   "inputsInline": true,
   "output": "Boolean",
   "outputShape": Blockly.OUTPUT_SHAPE_HEXAGONAL,
-  "style": "math_blocks",
+  'style': 'logic_blocks',
   "helpUrl": "%{BKY_LOGIC_COMPARE_HELPURL}"
   },
 
@@ -53,7 +53,7 @@ export var logic = [
   "inputsInline": true,
   "output": "Boolean",
   "outputShape": Blockly.OUTPUT_SHAPE_HEXAGONAL,
-  "style": "math_blocks",
+  'style': 'logic_blocks',
   "helpUrl": "%{BKY_LOGIC_COMPARE_HELPURL}"
   },
 
@@ -74,7 +74,7 @@ export var logic = [
   "inputsInline": true,
   "output": "Boolean",
   "outputShape": Blockly.OUTPUT_SHAPE_HEXAGONAL,
-  "style": "math_blocks",
+  'style': 'logic_blocks',
   "helpUrl": "%{BKY_LOGIC_COMPARE_HELPURL}"
   },
 
@@ -95,7 +95,7 @@ export var logic = [
   "inputsInline": true,
   "output": "Boolean",
   "outputShape": Blockly.OUTPUT_SHAPE_HEXAGONAL,
-  "style": "math_blocks",
+  'style': 'logic_blocks',
   "helpUrl": "%{BKY_LOGIC_COMPARE_HELPURL}"
   },
 
@@ -116,7 +116,7 @@ export var logic = [
   "inputsInline": true,
   "output": "Boolean",
   "outputShape": Blockly.OUTPUT_SHAPE_HEXAGONAL,
-  "style": "math_blocks",
+  'style': 'logic_blocks',
   "helpUrl": "%{BKY_LOGIC_COMPARE_HELPURL}"
   },
   

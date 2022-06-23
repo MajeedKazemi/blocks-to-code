@@ -19,7 +19,7 @@ export var math = [
     ],
     "inputsInline": true,
     "output": "Number",
-    "style": "math_blocks",
+    'style': 'logic_blocks',
     "helpUrl": "%{BKY_MATH_ARITHMETIC_HELPURL}",
   },
 
@@ -42,7 +42,7 @@ export var math = [
     ],
     "inputsInline": true,
     "output": "Number",
-    "style": "math_blocks",
+    'style': 'logic_blocks',
     "helpUrl": "%{BKY_MATH_ARITHMETIC_HELPURL}",
   },
   
@@ -65,7 +65,7 @@ export var math = [
     ],
     "inputsInline": true,
     "output": "Number",
-    "style": "math_blocks",
+    'style': 'logic_blocks',
     "helpUrl": "%{BKY_MATH_ARITHMETIC_HELPURL}",
   },
 
@@ -88,7 +88,7 @@ export var math = [
     ],
     "inputsInline": true,
     "output": "Number",
-    "style": "math_blocks",
+    'style': 'logic_blocks',
     "helpUrl": "%{BKY_MATH_ARITHMETIC_HELPURL}",
   },
 
@@ -109,7 +109,7 @@ export var math = [
     ],
     'output': 'Number',
     'inputsInline': true,
-    'style': 'math_blocks',
+    'style': 'logic_blocks',
   }
 
 ]
