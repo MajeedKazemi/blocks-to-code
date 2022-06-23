@@ -1,48 +1,49 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <title>Blocks-to-Code</title>
     <style>
-        html,
-        body {
-            height: 100%;
-            margin: 0;
-        }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
 
-        #blocklyDiv {
-            height: 100%;
-        }
-
-        
+      #blockly-container {
+        height: 100%;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-    
-
-
+  <body>
     <table width="100%" height="100%">
-        <tr height="100%">
-          <td width="70%">
-            <div id='blocklyDiv'></div>
-          </td>
-          <td>
-            <div>
-                <button id="blocklyButton">Convert</button>
-                <div id="code"></div>
-                <br>
-                <label id="label" for="input"></label>
-                <input type="text" id="input" name="input">
-                <button id="enter">Enter</button>
-                <div id="console"></div>
-            
-            </div>
-          </td>
-        </tr>
-      </table>
+      <tr height="100%">
+        <td width="70%">
+          <div id="blockly-container"></div>
+        </td>
+        <td>
+          <div>
+            <button id="run-button">Convert</button>
+            <div id="code"></div>
+            <br />
 
-    <script type='text/javascript' src='./index.js'></script>   
-</body>
+            <form id="user-input-form">
+              <label id="label" for="user-input"></label>
+              <input
+                type="text"
+                id="user-input"
+                name="input"
+                placeholder="enter something..."
+              />
+              <button>Enter</button>
+            </form>
 
+            <div id="console"></div>
+          </div>
+        </td>
+      </tr>
+    </table>
+
+    <script type="text/javascript" src="./index.js"></script>
+  </body>
 </html>
