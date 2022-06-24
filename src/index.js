@@ -108,6 +108,21 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("clear-button").addEventListener("click", function () {
     document.getElementById("console").textContent = "";
   });
+
+  document.getElementById("upgrade-button").addEventListener("click", function () {
+    // upgrade say to print
+    
+    // to be implemented: update toolbox
+    
+    workspace.updateToolbox(new_toolbox);
+    workspace.refreshToolboxSelection()
+
+    var xml = Blockly.Xml.workspaceToDom(workspace);
+    workspace.clear();
+    Blockly.Xml.domToWorkspace(xml, workspace);
+
+  });
+
 });
 
 Blockly.defineBlocksWithJsonArray(control);
