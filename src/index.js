@@ -97,19 +97,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
   workspace.createVariable("my variable");
   
-  
-
   const lang = "JavaScript";
-  const button = document.getElementById("run-button");
-  button.addEventListener("click", function () {
-    //alert("Check the console for the generated output.");
-    const code = Blockly[lang].workspaceToCode(workspace);
-    const divCode = document.getElementById("code");
-    const divConsole = document.getElementById("console");
-    console.log(code);
-    divCode.textContent = code;
 
+  document.getElementById("run-button").addEventListener("click", function () {
+    const code = Blockly[lang].workspaceToCode(workspace);
+    console.log(code);
     eval("(async () => {" + code + "})()");
+  });
+
+  document.getElementById("clear-button").addEventListener("click", function () {
+    document.getElementById("console").textContent = "";
   });
 });
 

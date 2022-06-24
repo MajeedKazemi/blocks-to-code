@@ -107,9 +107,7 @@ Blockly.JavaScript["sensing_answer"] = function (block) {
   return [code, Blockly.JavaScript.ORDER_ATOMIC];
 };
 
-Blockly.JavaScript["text_charAt"] = function (block) {
-  //asdf
-};
+
 
 Blockly.JavaScript["text_print"] = function (block) {
   const msg =

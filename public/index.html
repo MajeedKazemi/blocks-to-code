@@ -12,6 +12,12 @@
       #blockly-container {
         height: 100%;
       }
+
+      #console {
+        height: 50vh;
+        border:1px solid black;
+
+      }
     </style>
   </head>
 
@@ -23,22 +29,23 @@
         </td>
         <td>
           <div>
-            <button id="run-button">Convert</button>
-            <div id="code"></div>
-            <br />
+            <button id="run-button">Flag</button>
+            
+            <br>
 
-            <form id="user-input-form">
+            <form id="user-input-form" style="visibility: hidden">
               <label id="label" for="user-input"></label>
               <input
                 type="text"
                 id="user-input"
                 name="input"
-                placeholder="enter something..."
+                placeholder="Enter something..."
               />
-              <button>Enter</button>
+              <button>Submit</button>
             </form>
 
             <div id="console"></div>
+            <button id="clear-button">Clear Console</button>
           </div>
         </td>
       </tr>
