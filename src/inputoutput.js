@@ -1,8 +1,5 @@
 import * as Blockly from "blockly";
 
-Blockly.Msg.SENSING_ASKANDWAIT = "ask %1 and wait";
-Blockly.Msg.SENSING_ANSWER = "answer";
-
 export var inputoutput = [
   {
     'type': 'text',
@@ -64,7 +61,7 @@ export var inputoutput = [
   {
     "type": "sensing_askandwait",
     "colour": "#5CB1D6",
-    "message0": Blockly.Msg.SENSING_ASKANDWAIT,
+    "message0": "ask %1 and wait",
     "args0": [
       {
         "type": "input_value",
@@ -77,30 +74,13 @@ export var inputoutput = [
   {
     "type": "sensing_answer",
     "colour": "#5CB1D6",
-    "message0": Blockly.Msg.SENSING_ANSWER,
+    "message0": "answer",
     "checkboxInFlyout": true,
     "output": "String",
     "outputShape": Blockly.OUTPUT_SHAPE_ROUND,
   },
 ];
 
-Blockly.JavaScript["sensing_askandwait"] = function (block) {
-  // Prompt function.
-  if (block.getField("TEXT")) {
-    // Internal message.
-    var msg = Blockly.JavaScript.quote_(block.getFieldValue("TEXT"));
-  } else {
-    // External message.
-    var msg =
-      Blockly.JavaScript.valueToCode(
-        block,
-        "TEXT",
-        Blockly.JavaScript.ORDER_NONE
-      ) || "''";
-  }
-  var code = "var hidden_var = window.prompt(" + msg + ");\n";
-  return code;
-};
 
 Blockly.JavaScript["sensing_answer"] = function (block) {
   var code = "hidden_var";
@@ -119,39 +99,26 @@ Blockly.JavaScript["text_print"] = function (block) {
   return (
     `
   var divConsole = document.getElementById("console");
-  var content = document.createTextNode(` +
-    msg +
-    `);
+  var content = document.createTextNode(` + msg + `);
   divConsole.appendChild(content);
   divConsole.innerHTML += '<br>';`
   );
 };
 
 Blockly.JavaScript["sensing_askandwait"] = function (block) {
-  const msg =
-    Blockly.JavaScript.valueToCode(
-      block,
-      "TEXT",
-      Blockly.JavaScript.ORDER_NONE
-    ) || "''";
+  const msg = Blockly.JavaScript.valueToCode(block, "TEXT", Blockly.JavaScript.ORDER_NONE) || "''";
 
-  const sec =
-    Blockly.JavaScript.valueToCode(
-      block,
-      "second",
-      Blockly.JavaScript.ORDER_NONE
-    ) || "''";
-
-  return (
-    `
-    var divConsole = document.getElementById("console");
-    var content = document.createTextNode(` +
-    msg +
-    `);
-    divConsole.appendChild(content);
-    divConsole.innerHTML += '<br>';
+  const sec = Blockly.JavaScript.valueToCode(block, "second", Blockly.JavaScript.ORDER_NONE) || "''";
+  return (`
+    var console_div = document.getElementById("console");
+    var input_label = document.getElementById("label");
+    
+    input_label.textContent = ` + msg + `;
+    var input_form = document.getElementById("user-input-form");
+    input_form.style.visibility = "visible";
     
     var hidden_var = await getValueFromUserInput();
+    input_form.style.visibility = "hidden";
   `
   );
 };
