@@ -30,11 +30,10 @@ module.exports = {
     mode: 'development',
     entry: {
         index: './src/index.js',
-        logic: './src/logic.js',
         control: './src/control.js',
         variables: './src/variables.js',
         inputoutput: './src/inputoutput.js',
-        math: './src/math.js',
+        operator: './src/operator.js',
         event: './src/event.js',
         toolbox: './src/toolbox.js'
     },

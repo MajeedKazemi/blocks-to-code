@@ -87,45 +87,7 @@ export var inputoutput = [
     "output": "String",
     "outputShape": Blockly.OUTPUT_SHAPE_ROUND,
   },
-  {
-    "type": "text_join",
-    "message0": "join %1 %2",
-    "args0": [
-      {
-        "type": "input_value",
-        "name": "A",
-        "check": "String",
-      },
-      {
-        "type": "input_value",
-        "name": "B",
-        "check": "String",
-      },
-    ],
-    "output": "String",
-    "inputsInline": true,
-    "style": "logic_blocks",
-  },
-  {
-    type: "text_charAt",
-    message0: "letter %1 of %2",
-    args0: [
-      {
-        type: "input_value",
-        name: "A",
-        check: "Number",
-      },
-      {
-        type: "input_value",
-        name: "B",
-        check: "String",
-      },
-    ],
-    output: "String",
-    style: "logic_blocks",
-    helpUrl: "%{BKY_TEXT_CHARAT_HELPURL}",
-    inputsInline: true,
-  },
+  
 ];
 
 Blockly.JavaScript["sensing_askandwait"] = function (block) {

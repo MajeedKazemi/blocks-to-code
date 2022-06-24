@@ -21,8 +21,7 @@ import * as Blockly from "blockly";
 import { control } from "./control.js";
 import { event } from "./event.js";
 import { inputoutput } from "./inputoutput.js";
-import { logic } from "./logic.js";
-import { math } from "./math.js";
+import { operator } from "./operator.js";
 import { toolbox } from "./toolbox.js";
 import { variables } from "./variables.js";
 
@@ -63,11 +62,10 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-Blockly.defineBlocksWithJsonArray(logic);
 Blockly.defineBlocksWithJsonArray(control);
 Blockly.defineBlocksWithJsonArray(variables);
 Blockly.defineBlocksWithJsonArray(inputoutput);
-Blockly.defineBlocksWithJsonArray(math);
+Blockly.defineBlocksWithJsonArray(operator);
 Blockly.defineBlocksWithJsonArray(event);
 
 /**
