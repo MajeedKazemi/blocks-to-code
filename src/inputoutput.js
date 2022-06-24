@@ -158,19 +158,4 @@ Blockly.JavaScript["sensing_askandwait"] = function (block) {
   );
 };
 
-Blockly.JavaScript["text_join"] = function (block) {
-  const A =
-    Blockly.JavaScript.valueToCode(block, "A", Blockly.JavaScript.ORDER_NONE) ||
-    "''";
-
-  const B =
-    Blockly.JavaScript.valueToCode(block, "B", Blockly.JavaScript.ORDER_NONE) ||
-    "''";
-
-  return [
-    `
-    (${A}.toString() + ${B}.toString())
-  `,
-    Blockly.JavaScript.ORDER_FUNCTION_CALL,
-  ];
-};
+Blockly.JavaScript["math_number_constraint"] = Blockly.JavaScript["math_number"] 
