@@ -1,7 +1,9 @@
 import * as Blockly from 'blockly';
+Blockly.Blocks.style
 export var event = [
     {
       "type": "event_whenflagclicked",
+
       "message0": "when %1 clicked",
       "args0": [
         {

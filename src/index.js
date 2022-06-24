@@ -18,11 +18,10 @@
 import { ContinuousFlyout, ContinuousMetrics, ContinuousToolbox } from "@blockly/continuous-toolbox";
 import * as Blockly from "blockly";
 
-import { controls } from "./controls.js";
+import { control } from "./control.js";
 import { event } from "./event.js";
 import { inputoutput } from "./inputoutput.js";
 import { logic } from "./logic.js";
-import { loops } from "./loops.js";
 import { math } from "./math.js";
 import { toolbox } from "./toolbox.js";
 import { variables } from "./variables.js";
@@ -64,9 +63,8 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-Blockly.defineBlocksWithJsonArray(loops);
 Blockly.defineBlocksWithJsonArray(logic);
-Blockly.defineBlocksWithJsonArray(controls);
+Blockly.defineBlocksWithJsonArray(control);
 Blockly.defineBlocksWithJsonArray(variables);
 Blockly.defineBlocksWithJsonArray(inputoutput);
 Blockly.defineBlocksWithJsonArray(math);

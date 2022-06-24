@@ -3,6 +3,7 @@ export var math = [
     // -------------------- math_add --------------------
     {
     "type": "math_add",
+    "colour": "#59C059",
     "message0": "%1 + %2",
     "args0": [
       {
@@ -19,13 +20,13 @@ export var math = [
     ],
     "inputsInline": true,
     "output": "Number",
-    'style': 'logic_blocks',
     "helpUrl": "%{BKY_MATH_ARITHMETIC_HELPURL}",
   },
 
   // -------------------- math_subtract --------------------
   {
     "type": "math_subtract",
+    "colour": "#59C059",
     "message0": "%1 - %2",
     "args0": [
       {
@@ -42,13 +43,13 @@ export var math = [
     ],
     "inputsInline": true,
     "output": "Number",
-    'style': 'logic_blocks',
     "helpUrl": "%{BKY_MATH_ARITHMETIC_HELPURL}",
   },
   
   // -------------------- math_multiply --------------------
   {
     "type": "math_multiply",
+    "colour": "#59C059",
     "message0": "%1 * %2",
     "args0": [
       {
@@ -65,13 +66,13 @@ export var math = [
     ],
     "inputsInline": true,
     "output": "Number",
-    'style': 'logic_blocks',
     "helpUrl": "%{BKY_MATH_ARITHMETIC_HELPURL}",
   },
 
   // -------------------- math_divide --------------------
   {
     "type": "math_divide",
+    "colour": "#59C059",
     "message0": "%1 / %2",
     "args0": [
       {
@@ -88,12 +89,12 @@ export var math = [
     ],
     "inputsInline": true,
     "output": "Number",
-    'style': 'logic_blocks',
     "helpUrl": "%{BKY_MATH_ARITHMETIC_HELPURL}",
   },
 
   {
     "type": "math_random",
+    "colour": "#59C059",
     'message0': 'pick random %1 to %2',
     'args0': [
       {
@@ -109,7 +110,6 @@ export var math = [
     ],
     'output': 'Number',
     'inputsInline': true,
-    'style': 'logic_blocks',
   }
 
 ]

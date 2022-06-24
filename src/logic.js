@@ -1,6 +1,7 @@
 import * as Blockly from 'blockly';
 export var logic = [
   {"type": "logic_greater",
+  "colour": "#59C059",
   "message0": "%1 > %2",
   "args0": [
     {
@@ -15,11 +16,11 @@ export var logic = [
   "inputsInline": true,
   "output": "Boolean",
   "outputShape": Blockly.OUTPUT_SHAPE_HEXAGONAL,
-  'style': 'logic_blocks',
   "helpUrl": "%{BKY_LOGIC_COMPARE_HELPURL}"
   },
 
   {"type": "logic_less",
+  "colour": "#59C059",
   "message0": "%1 < %2",
   "args0": [
     {
@@ -34,11 +35,11 @@ export var logic = [
   "inputsInline": true,
   "output": "Boolean",
   "outputShape": Blockly.OUTPUT_SHAPE_HEXAGONAL,
-  'style': 'logic_blocks',
   "helpUrl": "%{BKY_LOGIC_COMPARE_HELPURL}"
   },
 
   {"type": "logic_equal",
+  "colour": "#59C059",
   "message0": "%1 = %2",
   "args0": [
     {
@@ -53,11 +54,11 @@ export var logic = [
   "inputsInline": true,
   "output": "Boolean",
   "outputShape": Blockly.OUTPUT_SHAPE_HEXAGONAL,
-  'style': 'logic_blocks',
   "helpUrl": "%{BKY_LOGIC_COMPARE_HELPURL}"
   },
 
   {"type": "logic_op_and",
+  "colour": "#59C059",
   "message0": "%1 and %2",
   "args0": [
     {
@@ -74,11 +75,11 @@ export var logic = [
   "inputsInline": true,
   "output": "Boolean",
   "outputShape": Blockly.OUTPUT_SHAPE_HEXAGONAL,
-  'style': 'logic_blocks',
   "helpUrl": "%{BKY_LOGIC_COMPARE_HELPURL}"
   },
 
   {"type": "logic_op_or",
+  "colour": "#59C059",
   "message0": "%1 or %2",
   "args0": [
     {
@@ -95,11 +96,11 @@ export var logic = [
   "inputsInline": true,
   "output": "Boolean",
   "outputShape": Blockly.OUTPUT_SHAPE_HEXAGONAL,
-  'style': 'logic_blocks',
   "helpUrl": "%{BKY_LOGIC_COMPARE_HELPURL}"
   },
 
   {"type": "text_count",
+  "colour": "#59C059",
   "message0": "%1 contains %2 ?",
   "args0": [
     {
@@ -116,13 +117,13 @@ export var logic = [
   "inputsInline": true,
   "output": "Boolean",
   "outputShape": Blockly.OUTPUT_SHAPE_HEXAGONAL,
-  'style': 'logic_blocks',
   "helpUrl": "%{BKY_LOGIC_COMPARE_HELPURL}"
   },
   
   // Block for if/elseif/else condition.
   {
     'type': 'controls_if',
+    "colour": "#FFAB19",
     'message0': '%{BKY_CONTROLS_IF_MSG_IF} %1 then',
     'args0': [
       {
@@ -140,7 +141,6 @@ export var logic = [
     ],
     'previousStatement': null,
     'nextStatement': null,
-    'style': 'logic_blocks',
     'helpUrl': '%{BKY_CONTROLS_IF_HELPURL}',
     'suppressPrefixSuffix': true,
     'extensions': ['controls_if_tooltip'],
@@ -148,6 +148,7 @@ export var logic = [
   // If/else block that does not use a mutator.
   {
     'type': 'controls_ifelse',
+    "colour": "#FFAB19",
     'message0': '%{BKY_CONTROLS_IF_MSG_IF} %1 then',
     'args0': [
       {
@@ -174,7 +175,6 @@ export var logic = [
     ],
     'previousStatement': null,
     'nextStatement': null,
-    'style': 'logic_blocks',
     'tooltip': '%{BKYCONTROLS_IF_TOOLTIP_2}',
     'helpUrl': '%{BKY_CONTROLS_IF_HELPURL}',
     'suppressPrefixSuffix': true,

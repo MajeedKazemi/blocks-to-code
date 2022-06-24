@@ -30,9 +30,8 @@ module.exports = {
     mode: 'development',
     entry: {
         index: './src/index.js',
-        loops: './src/loops.js',
         logic: './src/logic.js',
-        controls: './src/controls.js',
+        control: './src/control.js',
         variables: './src/variables.js',
         inputoutput: './src/inputoutput.js',
         math: './src/math.js',

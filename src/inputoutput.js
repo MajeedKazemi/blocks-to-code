@@ -5,46 +5,106 @@ Blockly.Msg.SENSING_ANSWER = "answer";
 
 export var inputoutput = [
   {
-    type: "sensing_askandwait",
-    message0: Blockly.Msg.SENSING_ASKANDWAIT,
-    args0: [
-      {
-        type: "input_value",
-        name: "TEXT",
-      },
-    ],
-    previousStatement: null,
-    nextStatement: null,
-    style: "variable_blocks",
+    'type': 'math_number',
+    'message0': '%1',
+    'args0': [{
+      'type': 'field_number',
+      'name': 'NUM',
+      'value': 0,
+    }],
+    'output': 'Number',
+    'helpUrl': '%{BKY_MATH_NUMBER_HELPURL}',
+    'style': 'math_blocks',
+    'tooltip': '%{BKY_MATH_NUMBER_TOOLTIP}',
+    'extensions': ['parent_tooltip_when_inline'],
+  },
+  {
+    'type': 'math_number_constraint',
+    'message0': '%1',
+    'args0': [{
+      'type': 'field_number',
+      'name': 'NUM',
+      'value': 10,
+      'min': 0,
+      'precision': 1,
+    }],
+    'output': 'Number',
+    'helpUrl': '%{BKY_MATH_NUMBER_HELPURL}',
+    'style': 'math_blocks',
+    'tooltip': '%{BKY_MATH_NUMBER_TOOLTIP}',
+    'extensions': ['parent_tooltip_when_inline'],
+  },
+  {
+  'type': 'text',
+    'message0': '%1',
+    'args0': [{
+      'type': 'field_input',
+      'name': 'TEXT',
+      'text': 'string',
+    }],
+    'output': 'String',
+    'style': 'text_blocks',
+    'helpUrl': '%{BKY_TEXT_TEXT_HELPURL}',
+    'tooltip': '%{BKY_TEXT_TEXT_TOOLTIP}',
   },
 
   {
-    type: "sensing_answer",
-    message0: Blockly.Msg.SENSING_ANSWER,
-    checkboxInFlyout: true,
-
-    output: "String",
-    outputShape: Blockly.OUTPUT_SHAPE_ROUND,
-    style: "variable_blocks",
-  },
+    "type": 'text_print',
+    "colour": "#5CB1D6",
+    'message0': "say %1",
+  'args0': [
+    {
+      'type': 'input_value',
+      'name': 'TEXT',
+    },
+  ],
+  'previousStatement': null,
+  'nextStatement': null,
+  'tooltip': '%{BKY_TEXT_PRINT_TOOLTIP',
+  'helpUrl': '%{BKY_TEXT_PRINT_HELPURL',
+},
   {
-    type: "text_join",
-    message0: "join %1 %2",
-    args0: [
+
+    "type": "sensing_askandwait",
+    "colour": "#5CB1D6",
+    "message0": Blockly.Msg.SENSING_ASKANDWAIT,
+    "args0": [
       {
-        type: "input_value",
-        name: "A",
-        check: "String",
-      },
-      {
-        type: "input_value",
-        name: "B",
-        check: "String",
+        "type": "input_value",
+        "name": "TEXT",
       },
     ],
-    output: "String",
-    inputsInline: true,
-    style: "logic_blocks",
+    "previousStatement": null,
+    "nextStatement": null,
+  },
+
+  {
+    "type": "sensing_answer",
+    "colour": "#5CB1D6",
+    "message0": Blockly.Msg.SENSING_ANSWER,
+    "checkboxInFlyout": true,
+
+    "output": "String",
+    "outputShape": Blockly.OUTPUT_SHAPE_ROUND,
+  },
+  {
+    "type": "text_join",
+    "message0": "join %1 %2",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "A",
+        "check": "String",
+      },
+      {
+        "type": "input_value",
+        "name": "B",
+        "check": "String",
+      },
+    ],
+    "output": "String",
+    "inputsInline": true,
+    "style": "logic_blocks",
   },
   {
     type: "text_charAt",
