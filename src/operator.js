@@ -99,12 +99,12 @@ export var operator = [
     'args0': [
       {
         'type': 'input_value',
-        'name': 'SUB',
+        'name': 'A',
         'check': 'Number',
       },
       {
         'type': 'input_value',
-        'name': 'TEXT',
+        'name': 'B',
         'check': 'Number',
       },
     ],
@@ -301,7 +301,7 @@ export var operator = [
   {
     'type': 'math_modulo',
     "colour": "#59C059",
-    'message0': '%{BKY_MATH_MODULO_TITLE}',
+    'message0': '%1 mod %2',
     'args0': [
       {
         'type': 'input_value',
@@ -393,34 +393,4 @@ Blockly.JavaScript['math_subtract'] = function(block) {
     let code;
     code = argument0 + operator + argument1;
     return [code, order];
-}
-
-Blockly.JavaScript['logic_greater'] = function(block) {
-  const operator = ">"
-  const order = Blockly.JavaScript.ORDER_RELATIONAL
-  const argument0 = Blockly.JavaScript.valueToCode(block, 'A', order) || '0';
-  const argument1 = Blockly.JavaScript.valueToCode(block, 'B', order) || '0';
-  let code;
-  code = argument0 + operator + argument1;
-  return [code, order];
-}
-
-Blockly.JavaScript['logic_less'] = function(block) {
-  const operator = "<"
-  const order = Blockly.JavaScript.ORDER_RELATIONAL
-  const argument0 = Blockly.JavaScript.valueToCode(block, 'A', order) || '0';
-  const argument1 = Blockly.JavaScript.valueToCode(block, 'B', order) || '0';
-  let code;
-  code = argument0 + operator + argument1;
-  return [code, order];
-}
-
-Blockly.JavaScript['logic_equal'] = function(block) {
-  const operator = "=="
-  const order = Blockly.JavaScript.ORDER_EQUALITY
-  const argument0 = Blockly.JavaScript.valueToCode(block, 'A', order) || '0';
-  const argument1 = Blockly.JavaScript.valueToCode(block, 'B', order) || '0';
-  let code;
-  code = argument0 + operator + argument1;
-  return [code, order];
 }

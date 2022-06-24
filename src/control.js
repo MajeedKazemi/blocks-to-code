@@ -1,3 +1,4 @@
+import * as Blockly from 'blockly';
 export var control = [
   
   // Block for if/elseif/else condition.
@@ -119,4 +120,41 @@ export var control = [
         'helpUrl': '%{BKY_CONTROLS_WHILEUNTIL_HELPURL}',
         'extensions': ['controls_whileUntil_tooltip'],
       },
+      {
+        'type': 'controls_break',
+        "colour": "#FFAB19",
+        'message0': 'stop all',
+        'previousStatement': null,
+      },
 ]
+
+
+
+
+Blockly.JavaScript['controls_whileUntil'] = function(block) {
+  // Do while/until loop.
+  const until = true;
+  let argument0 =
+  Blockly.JavaScript.valueToCode(
+          block, 'BOOL',
+          until ? Blockly.JavaScript.ORDER_LOGICAL_NOT : Blockly.JavaScript.ORDER_NONE) ||
+      'false';
+  let branch = Blockly.JavaScript.statementToCode(block, 'DO');
+  branch = Blockly.JavaScript.addLoopTrap(branch, block);
+  if (until) {
+    argument0 = '!' + argument0;
+  }
+  return 'while (' + argument0 + ') {\n' + branch + '}\n';
+};
+
+Blockly.JavaScript['controls_forever'] = function(block) {
+  
+  let branch = Blockly.JavaScript.statementToCode(block, 'DO');
+  branch = Blockly.JavaScript.addLoopTrap(branch, block);
+  return 'while (true) {\n' + branch + '}\n';
+};
+
+Blockly.JavaScript['controls_break'] = function(block) {
+  
+  return 'break;\n';
+};

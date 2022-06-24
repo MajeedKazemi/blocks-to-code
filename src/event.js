@@ -1,5 +1,5 @@
 import * as Blockly from 'blockly';
-Blockly.Blocks.style
+
 export var event = [
     {
       "type": "event_whenflagclicked",

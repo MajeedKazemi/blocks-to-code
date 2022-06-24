@@ -86,6 +86,10 @@ export var toolbox = {
             "kind": "block",
             "type": "controls_whileUntil"
           },
+          {
+            "kind": "block",
+            "type": "controls_break"
+          }
           
         ]
       },
@@ -96,35 +100,179 @@ export var toolbox = {
         "contents": [
           {
             "kind": "block",
-            "type": "math_add"
+            "type": "math_add",
+            "inputs": {
+              "A": {
+                "shadow": {
+                  "type": "math_number",
+                  "fields": {
+                    "NUM": ""
+                  }
+                }
+              },
+              "B": {
+                "shadow": {
+                  "type": "math_number",
+                  "fields": {
+                    "NUM": "50"
+                  }
+                }
+              },
+            }
           },
           {
             "kind": "block",
-            "type": "math_subtract"
+            "type": "math_subtract",
+            "inputs": {
+              "A": {
+                "shadow": {
+                  "type": "math_number",
+                  "fields": {
+                    "NUM": ""
+                  }
+                }
+              },
+              "B": {
+                "shadow": {
+                  "type": "math_number",
+                  "fields": {
+                    "NUM": "50"
+                  }
+                }
+              },
+            }
           },
           {
             "kind": "block",
-            "type": "math_multiply"
+            "type": "math_multiply",
+            "inputs": {
+              "A": {
+                "shadow": {
+                  "type": "math_number",
+                  "fields": {
+                    "NUM": ""
+                  }
+                }
+              },
+              "B": {
+                "shadow": {
+                  "type": "math_number",
+                  "fields": {
+                    "NUM": "50"
+                  }
+                }
+              },
+            }
           },
           {
             "kind": "block",
-            "type": "math_divide"
+            "type": "math_divide",
+            "inputs": {
+              "A": {
+                "shadow": {
+                  "type": "math_number",
+                  "fields": {
+                    "NUM": ""
+                  }
+                }
+              },
+              "B": {
+                "shadow": {
+                  "type": "math_number",
+                  "fields": {
+                    "NUM": "50"
+                  }
+                }
+              },
+            }
           },
           {
             "kind": "block",
-            "type": "math_random"
+            "type": "math_random",
+            "inputs": {
+              "A": {
+                "shadow": {
+                  "type": "math_number",
+                  "fields": {
+                    "NUM": ""
+                  }
+                }
+              },
+              "B": {
+                "shadow": {
+                  "type": "math_number",
+                  "fields": {
+                    "NUM": "50"
+                  }
+                }
+              },
+            }
           },
           {
             "kind": "block",
-            "type": "logic_greater"
+            "type": "logic_greater",
+            "inputs": {
+              "A": {
+                "shadow": {
+                  "type": "math_number",
+                  "fields": {
+                    "NUM": ""
+                  }
+                }
+              },
+              "B": {
+                "shadow": {
+                  "type": "math_number",
+                  "fields": {
+                    "NUM": "50"
+                  }
+                }
+              },
+            }
           },
           {
             "kind": "block",
-            "type": "logic_less"
+            "type": "logic_less",
+            "inputs": {
+              "A": {
+                "shadow": {
+                  "type": "math_number",
+                  "fields": {
+                    "NUM": ""
+                  }
+                }
+              },
+              "B": {
+                "shadow": {
+                  "type": "math_number",
+                  "fields": {
+                    "NUM": "50"
+                  }
+                }
+              },
+            }
           },
           {
             "kind": "block",
-            "type": "logic_equal"
+            "type": "logic_equal",
+            "inputs": {
+              "A": {
+                "shadow": {
+                  "type": "math_number",
+                  "fields": {
+                    "NUM": ""
+                  }
+                }
+              },
+              "B": {
+                "shadow": {
+                  "type": "math_number",
+                  "fields": {
+                    "NUM": "50"
+                  }
+                }
+              },
+            }
           },
           {
             "kind": "block",
@@ -140,32 +288,139 @@ export var toolbox = {
           },
           {
             "kind": "block",
-            "type": "text_join"
+            "type": "text_join",
+            "inputs": {
+              "A": {
+                "shadow": {
+                  "type": "text",
+                  "fields": {
+                    "TEXT": "apple"
+                  }
+                }
+              },
+              "B": {
+                "shadow": {
+                  "type": "text",
+                  "fields": {
+                    "TEXT": "banana"
+                  }
+                }
+              },
+            }
           },
           {
             "kind": "block",
-            "type": "text_charAt"
+            "type": "text_charAt",
+            "inputs": {
+              "A": {
+                "shadow": {
+                  "type": "math_number_constraint",
+                  "fields": {
+                    "NUM": "1"
+                  }
+                  
+                }
+              },
+              "B": {
+                "shadow": {
+                  "type": "text",
+                  "fields": {
+                    "TEXT": "apple"
+                  }
+                }
+              },
+            }
           },
           {
             "kind": "block",
-            "type": "text_length"
+            "type": "text_length",
+            "inputs": {
+              "VALUE": {
+                "shadow": {
+                  "type": "text",
+                  "fields": {
+                    "TEXT": "apple"
+                  }
+                  
+                }
+              }
+            }
           },
           {
             "kind": "block",
-            "type": "text_count"
+            "type": "text_count",
+            "inputs": {
+              "A": {
+                "shadow": {
+                  "type": "text",
+                  "fields": {
+                    "TEXT": "apple"
+                  }
+                }
+              },
+              "B": {
+                "shadow": {
+                  "type": "text",
+                  "fields": {
+                    "TEXT": "a"
+                  }
+                }
+              },
+            }
           },
           {
             "kind": "block",
-            "type": "math_modulo"
+            "type": "math_modulo",
+            "inputs": {
+              "DIVIDEND": {
+                "shadow": {
+                  "type": "math_number",
+                  "fields": {
+                    "NUM": ""
+                  }
+                }
+              },
+              "DIVISOR": {
+                "shadow": {
+                  "type": "math_number",
+                  "fields": {
+                    "NUM": "50"
+                  }
+                }
+              },
+            }
           },
           {
             "kind": "block",
-            "type": "math_round"
+            "type": "math_round",
+            "inputs": {
+              "NUM": {
+                "shadow": {
+                  "type": "math_number",
+                  "fields": {
+                    "NUM": ""
+                  }
+                }
+              },
+              
+            }
           },
           {
             "kind": "block",
-            "type": "math_single"
+            "type": "math_single",
+            "inputs": {
+              "NUM": {
+                "shadow": {
+                  "type": "math_number",
+                  "fields": {
+                    "NUM": ""
+                  }
+                }
+              },
+              
+            }
           },
+       
         ]
       },
       {

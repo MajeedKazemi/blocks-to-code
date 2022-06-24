@@ -31,8 +31,6 @@ import { variables } from "./variables.js";
  * @author samelh@google.com (Sam El-Husseini)
  */
 
-Blockly.Msg.MATH_MODULO_TITLE = "%1 mod %2";
-Blockly.Msg.TEXT_PRINT_TITLE = "say %1";
 
 document.addEventListener("DOMContentLoaded", function () {
   const workspace = Blockly.inject("blockly-container", {
@@ -47,6 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   workspace.createVariable("my variable");
+  
 
   const lang = "JavaScript";
   const button = document.getElementById("run-button");

@@ -5,12 +5,24 @@ Blockly.Msg.SENSING_ANSWER = "answer";
 
 export var inputoutput = [
   {
+    'type': 'text',
+    'message0': '%1',
+    'args0': [{
+      'type': 'field_input',
+      'name': 'TEXT',
+      'text': 'string',
+    }],
+    'output': 'String',
+    'style': 'text_blocks',
+    'helpUrl': '%{BKY_TEXT_TEXT_HELPURL}',
+    'tooltip': '%{BKY_TEXT_TEXT_TOOLTIP}',
+  },
+  {
     'type': 'math_number',
     'message0': '%1',
     'args0': [{
       'type': 'field_number',
       'name': 'NUM',
-      'value': 0,
     }],
     'output': 'Number',
     'helpUrl': '%{BKY_MATH_NUMBER_HELPURL}',
@@ -35,36 +47,21 @@ export var inputoutput = [
     'extensions': ['parent_tooltip_when_inline'],
   },
   {
-  'type': 'text',
-    'message0': '%1',
-    'args0': [{
-      'type': 'field_input',
-      'name': 'TEXT',
-      'text': 'string',
-    }],
-    'output': 'String',
-    'style': 'text_blocks',
-    'helpUrl': '%{BKY_TEXT_TEXT_HELPURL}',
-    'tooltip': '%{BKY_TEXT_TEXT_TOOLTIP}',
-  },
-
-  {
     "type": 'text_print',
     "colour": "#5CB1D6",
     'message0': "say %1",
-  'args0': [
-    {
-      'type': 'input_value',
-      'name': 'TEXT',
-    },
-  ],
-  'previousStatement': null,
-  'nextStatement': null,
-  'tooltip': '%{BKY_TEXT_PRINT_TOOLTIP',
-  'helpUrl': '%{BKY_TEXT_PRINT_HELPURL',
-},
+    'args0': [
+      {
+        'type': 'input_value',
+        'name': 'TEXT',
+      },
+    ],
+    'previousStatement': null,
+    'nextStatement': null,
+    'tooltip': '%{BKY_TEXT_PRINT_TOOLTIP',
+    'helpUrl': '%{BKY_TEXT_PRINT_HELPURL',
+  },
   {
-
     "type": "sensing_askandwait",
     "colour": "#5CB1D6",
     "message0": Blockly.Msg.SENSING_ASKANDWAIT,
@@ -77,17 +74,14 @@ export var inputoutput = [
     "previousStatement": null,
     "nextStatement": null,
   },
-
   {
     "type": "sensing_answer",
     "colour": "#5CB1D6",
     "message0": Blockly.Msg.SENSING_ANSWER,
     "checkboxInFlyout": true,
-
     "output": "String",
     "outputShape": Blockly.OUTPUT_SHAPE_ROUND,
   },
-  
 ];
 
 Blockly.JavaScript["sensing_askandwait"] = function (block) {
