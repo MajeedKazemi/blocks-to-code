@@ -105,7 +105,11 @@ document.addEventListener("DOMContentLoaded", function () {
     eval("(async () => {" + code + "})()");
   });
 
-  document.getElementById("clear-button").addEventListener("click", function () {
+  document.getElementById("clear-workspace-button").addEventListener("click", function () {
+    workspace.clear()
+  });
+
+  document.getElementById("clear-console-button").addEventListener("click", function () {
     document.getElementById("console").textContent = "";
   });
 
