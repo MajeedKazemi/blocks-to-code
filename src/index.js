@@ -24,9 +24,30 @@ import { inputoutput } from "./inputoutput.js";
 import { operator } from "./operator.js";
 import { toolbox, helperToolbox } from "./toolbox.js";
 import { variables } from "./variables.js";
-import { print_block } from "./blocks.js";
-console.log(print_block)
+import { text_print_block, sensing_askandwait_block } from "./blocks.js";
 
+function simplifiedUpdateToolbox(workspace){
+  // save all variables before resetting toolbox & workspace
+  var all_variables = workspace.getAllVariables();
+
+  // clear toolbox using blank, helper toolbox
+  workspace.updateToolbox(helperToolbox);
+  workspace.refreshToolboxSelection()
+  
+  // reload toolbox with (modified) toolbox
+  workspace.updateToolbox(toolbox);
+  workspace.refreshToolboxSelection();
+
+  // save workspace, clear & reload
+  var xml = Blockly.Xml.workspaceToDom(workspace);
+  workspace.clear();
+  Blockly.Xml.domToWorkspace(xml, workspace);
+
+  // reload variables to toolbox
+  for (var i=0; i<all_variables.length; i++){
+    workspace.createVariable(all_variables[i].name,all_variables[i].type,all_variables[i].id )
+  }
+}
 
 var customVariableCategory = function(workspace) {
   const variableModelList = workspace.getVariablesOfType('');
@@ -134,36 +155,46 @@ document.addEventListener("DOMContentLoaded", function () {
         'tooltip': '%{BKY_TEXT_PRINT_TOOLTIP',
         'helpUrl': '%{BKY_TEXT_PRINT_HELPURL',
       };
-      var new_generator = print_block.getBlockGenerator()
-      print_block.upgrade(new_definition, new_generator);
+      var new_generator = text_print_block.getBlockGenerator()
+      text_print_block.upgrade(new_definition, new_generator);
       Blockly.defineBlocksWithJsonArray([new_definition])
-      workspace.updateToolbox(helperToolbox);
-      workspace.refreshToolboxSelection()
-      
-      workspace.updateToolbox(toolbox);
-      workspace.refreshToolboxSelection()
-
-      var xml = Blockly.Xml.workspaceToDom(workspace);
-      workspace.clear();
-      Blockly.Xml.domToWorkspace(xml, workspace);
     }
     else {
       // original
-
-      var original_definition = print_block.getBlockDefinition(1);
-      var original_generator = print_block.getBlockGenerator(1);
+      var original_definition = text_print_block.getBlockDefinition(1);
+      var original_generator = text_print_block.getBlockGenerator(1);
       Blockly.defineBlocksWithJsonArray([original_definition]);
-      workspace.updateToolbox(helperToolbox);
-      workspace.refreshToolboxSelection()
-      
-      workspace.updateToolbox(toolbox);
-      workspace.refreshToolboxSelection()
-
-      var xml = Blockly.Xml.workspaceToDom(workspace);
-      workspace.clear();
-      Blockly.Xml.domToWorkspace(xml, workspace);
-
     }
+    simplifiedUpdateToolbox(workspace);
+  });
+
+  document.getElementById("input_upgrade").addEventListener('change', () => {
+    if (document.getElementById("input_upgrade").checked){
+      // upgrade
+      var new_definition = {
+        "type": "sensing_askandwait",
+        "colour": "#5CB1D6",
+        "message0": "input %1",
+        "args0": [
+          {
+            "type": "input_value",
+            "name": "TEXT",
+          },
+        ],
+        "previousStatement": null,
+        "nextStatement": null,
+      };
+      var new_generator = sensing_askandwait_block.getBlockGenerator()
+      sensing_askandwait_block.upgrade(new_definition, new_generator);
+      Blockly.defineBlocksWithJsonArray([new_definition])
+    }
+    else {
+      // original
+      var original_definition = sensing_askandwait_block.getBlockDefinition(1);
+      var original_generator = sensing_askandwait_block.getBlockGenerator(1);
+      Blockly.defineBlocksWithJsonArray([original_definition]);
+    }
+    simplifiedUpdateToolbox(workspace);
   });
 
   document.getElementById("upgrade-button").addEventListener("click", function () {

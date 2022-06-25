@@ -70,4 +70,37 @@ var initial_generator = function (block) {
     );
   };
 
-export var print_block = new UpgradableBlock(name, initial_definition, initial_generator);
+export var text_print_block = new UpgradableBlock(name, initial_definition, initial_generator);
+
+export var sensing_askandwait_block = new UpgradableBlock("sensing_askandwait",
+  {
+    "type": "sensing_askandwait",
+    "colour": "#5CB1D6",
+    "message0": "ask %1 and wait",
+    "args0": [
+      {
+        "type": "input_value",
+        "name": "TEXT",
+      },
+    ],
+    "previousStatement": null,
+    "nextStatement": null,
+  },
+  function (block) {
+    const msg = Blockly.JavaScript.valueToCode(block, "TEXT", Blockly.JavaScript.ORDER_NONE) || "''";
+  
+    const sec = Blockly.JavaScript.valueToCode(block, "second", Blockly.JavaScript.ORDER_NONE) || "''";
+    return (`
+      var console_div = document.getElementById("console");
+      var input_label = document.getElementById("label");
+      
+      input_label.textContent = ` + msg + `;
+      var input_form = document.getElementById("user-input-form");
+      input_form.style.visibility = "visible";
+      
+      var hidden_var = await getValueFromUserInput();
+      input_form.style.visibility = "hidden";
+    `
+    );
+  }
+  )
