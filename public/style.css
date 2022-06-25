@@ -1,0 +1,15 @@
+html,
+
+body {
+height: 100%;
+margin: 0;
+}
+
+#blockly-container {
+height: 100%;
+}
+
+#console {
+height: 50vh;
+border:1px solid black;
+}

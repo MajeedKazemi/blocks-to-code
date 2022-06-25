@@ -21,7 +21,6 @@ class UpgradableBlock {
 
     getBlockDefinition(input_version) {
         if (input_version){
-          console.log(this.definition[input_version-1])
             return this.definition[input_version-1];
         }
         else return this.definition[this.version-1];
