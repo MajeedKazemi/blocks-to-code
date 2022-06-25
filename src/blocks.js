@@ -1,7 +1,7 @@
 class UpgradableBlock {
 
     constructor(name, initial_definition, initial_generator) {
-        this.version = 0;
+        this.version = 1;
         this.definition = [];
         this.generator = [];
         this.name = name;
@@ -9,25 +9,29 @@ class UpgradableBlock {
         this.generator.push(initial_generator);
         
     }
+    downgrade(to_version) {
+        this.version = to_version;
+    }
 
     upgrade(new_definition, new_generator) {
-        definition.push(new_definition);
-        generator.push(new_generator);
-        version += 1;
+        this.definition.push(new_definition);
+        this.generator.push(new_generator);
+        this.version += 1;
     }
 
     getBlockDefinition(input_version) {
         if (input_version){
-            return definition[input_version];
+          console.log(this.definition[input_version-1])
+            return this.definition[input_version-1];
         }
-        else return definition[version];
+        else return this.definition[this.version-1];
     }
 
     getBlockGenerator(input_version) {
         if (input_version){
-            return generator[input_version];
+            return this.generator[input_version-1];
         }
-        else return generator[version];
+        else return this.generator[this.version-1];
     }
 
 

@@ -116,6 +116,56 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("console").textContent = "";
   });
 
+  document.getElementById("print_upgrade").addEventListener('change', () => {
+    if (document.getElementById("print_upgrade").checked){
+      // upgrade
+      var new_definition = {
+        "type": 'text_print',
+        "colour": "#5CB1D6",
+        'message0': "print %1",
+        'args0': [
+          {
+            'type': 'input_value',
+            'name': 'TEXT',
+          },
+        ],
+        'previousStatement': null,
+        'nextStatement': null,
+        'tooltip': '%{BKY_TEXT_PRINT_TOOLTIP',
+        'helpUrl': '%{BKY_TEXT_PRINT_HELPURL',
+      };
+      var new_generator = print_block.getBlockGenerator()
+      print_block.upgrade(new_definition, new_generator);
+      Blockly.defineBlocksWithJsonArray([new_definition])
+      workspace.updateToolbox(helperToolbox);
+      workspace.refreshToolboxSelection()
+      
+      workspace.updateToolbox(toolbox);
+      workspace.refreshToolboxSelection()
+
+      var xml = Blockly.Xml.workspaceToDom(workspace);
+      workspace.clear();
+      Blockly.Xml.domToWorkspace(xml, workspace);
+    }
+    else {
+      // original
+
+      var original_definition = print_block.getBlockDefinition(1);
+      var original_generator = print_block.getBlockGenerator(1);
+      Blockly.defineBlocksWithJsonArray([original_definition]);
+      workspace.updateToolbox(helperToolbox);
+      workspace.refreshToolboxSelection()
+      
+      workspace.updateToolbox(toolbox);
+      workspace.refreshToolboxSelection()
+
+      var xml = Blockly.Xml.workspaceToDom(workspace);
+      workspace.clear();
+      Blockly.Xml.domToWorkspace(xml, workspace);
+
+    }
+  });
+
   document.getElementById("upgrade-button").addEventListener("click", function () {
     // upgrade say to print
     
