@@ -35,7 +35,8 @@ module.exports = {
         inputoutput: './src/inputoutput.js',
         operator: './src/operator.js',
         event: './src/event.js',
-        toolbox: './src/toolbox.js'
+        toolbox: './src/toolbox.js',
+        blocks: './src/blocks.js',
     },
     output: {
         path: path.resolve(__dirname, 'build'),

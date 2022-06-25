@@ -24,6 +24,9 @@ import { inputoutput } from "./inputoutput.js";
 import { operator } from "./operator.js";
 import { toolbox, helperToolbox } from "./toolbox.js";
 import { variables } from "./variables.js";
+import { print_block } from "./blocks.js";
+console.log(print_block)
+
 
 var customVariableCategory = function(workspace) {
   const variableModelList = workspace.getVariablesOfType('');
@@ -152,6 +155,9 @@ Blockly.defineBlocksWithJsonArray(variables);
 Blockly.defineBlocksWithJsonArray(inputoutput);
 Blockly.defineBlocksWithJsonArray(operator);
 Blockly.defineBlocksWithJsonArray(event);
+
+
+
 
 /**
  * the getValueFromUserInput() function is called within the `sensing_askandwait` block
