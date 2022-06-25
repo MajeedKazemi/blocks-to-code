@@ -22,7 +22,7 @@ import { control } from "./control.js";
 import { event } from "./event.js";
 import { inputoutput } from "./inputoutput.js";
 import { operator } from "./operator.js";
-import { toolbox } from "./toolbox.js";
+import { toolbox, helperToolbox } from "./toolbox.js";
 import { variables } from "./variables.js";
 
 var customVariableCategory = function(workspace) {
@@ -113,8 +113,26 @@ document.addEventListener("DOMContentLoaded", function () {
     // upgrade say to print
     
     // to be implemented: update toolbox
+    Blockly.defineBlocksWithJsonArray([{
+      "type": 'text_print',
+      "colour": "#5CB1D6",
+      'message0': "print %1",
+      'args0': [
+        {
+          'type': 'input_value',
+          'name': 'TEXT',
+        },
+      ],
+      'previousStatement': null,
+      'nextStatement': null,
+      'tooltip': '%{BKY_TEXT_PRINT_TOOLTIP',
+      'helpUrl': '%{BKY_TEXT_PRINT_HELPURL',
+    },
+    ])
+    workspace.updateToolbox(helperToolbox);
+    workspace.refreshToolboxSelection()
     
-    workspace.updateToolbox(new_toolbox);
+    workspace.updateToolbox(toolbox);
     workspace.refreshToolboxSelection()
 
     var xml = Blockly.Xml.workspaceToDom(workspace);

@@ -431,3 +431,20 @@ export var toolbox = {
       },
     ]
   };
+
+
+  export var helperToolbox = {
+    "kind": "categoryToolbox",
+    "contents": [
+      {
+        "kind": "category",
+        "name": "Helper",
+        "contents": [
+          {
+            "kind": "block",
+            "type": "text"
+          }
+        ]
+      }
+    ]
+  };
