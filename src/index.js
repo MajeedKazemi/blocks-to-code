@@ -119,33 +119,43 @@ document.addEventListener("DOMContentLoaded", function () {
     renderer: "zelos",
   });
 
-  
-  //workspace.addChangeListener(Blockly.Events.disableOrphans);
-
   workspace.createVariable("my variable");
   
   const lang = "JavaScript";
 
   document.getElementById("run-button").addEventListener("click", function () {
     const code = Blockly[lang].workspaceToCode(workspace);
+
+    var json = Blockly.serialization.workspaces.save(workspace);
+
+    // Store top blocks separately, and remove them from the JSON.
+    var blocks = json['blocks']['blocks'];
+    var topBlocks = blocks.slice();  // Create shallow copy.
     
-    var code_arr = code.split('// when flag clicked, execute below');
+    
+    blocks.length = 0;
+
+    // Load each block into the workspace individually and generate code.
+    var allCode = [];
+    var headless = new Blockly.Workspace();
     
     for (var i = 0; i < topBlocks.length; i++) {
-      var topBlock = topBlocks[i];
-      if (topBlock.type !== "event_whenflagclicked") {
-        topBlock.setEnabled(false);
-      }
+      if (topBlocks[i].type != "event_whenflagclicked") continue;
+      var block = topBlocks[i];
+      blocks.push(block);
+      Blockly.serialization.workspaces.load(json, headless);
+      allCode.push(Blockly.JavaScript.workspaceToCode(headless));
+      blocks.length = 0;
     }
-    if (code_arr.length==1) return;
-    else {
-      for (var i=1; i<code_arr.length; i++){
-        // eval the code one by one
-        eval("(async () => {" + code_arr[i] + "})()");
-      }
+    console.log(allCode);
+    
+    for (var i=0; i<allCode.length; i++){
+      // eval the code one by one
+      eval("(async () => {" + allCode[i] + "})()");
+    }
     }
     
-  });
+  );
 
   document.getElementById("clear-workspace-button").addEventListener("click", function () {
     workspace.clear()
