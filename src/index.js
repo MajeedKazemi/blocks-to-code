@@ -49,6 +49,15 @@ function simplifiedUpdateToolbox(workspace){
   }
 }
 
+function addLoopCounter(code){
+  // add a counter variable at the start of the code
+  // add an if statement at every other line to check the counter
+  
+  var new_code = "var hidden_loop_counter = 0;" + code;
+  new_code = new_code.replaceAll(";", "; if (hidden_loop_counter==1000) return; hidden_loop_counter+=1; ");
+  return new_code;
+}
+
 var customVariableCategory = function(workspace) {
   const variableModelList = workspace.getVariablesOfType('');
 
@@ -151,7 +160,11 @@ document.addEventListener("DOMContentLoaded", function () {
     
     for (var i=0; i<allCode.length; i++){
       // eval the code one by one
-      eval("(async () => {" + allCode[i] + "})()");
+      var clean_code = addLoopCounter(allCode[i])
+      console.log("here")
+      console.log(clean_code);
+      
+      eval("(async () => {" + clean_code + "})()");
     }
     }
     
