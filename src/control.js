@@ -126,6 +126,50 @@ export var control = [
         'message0': 'stop all',
         'previousStatement': null,
       },
+      {
+        'type': 'controls_ifelseif',
+        "colour": "#FFAB19",
+        'message0': 'if %1 then',
+        'args0': [
+          {
+            'type': 'input_value',
+            'name': 'IF0',
+            'check': 'Boolean',
+          },
+        ],
+        'message1': '%1',
+        'args1': [
+          {
+            'type': 'input_statement',
+            'name': 'DO0',
+          },
+        ],
+        'message2': 'else if %1 then',
+        'args2': [
+          {
+            'type': 'input_value',
+            'name': 'IF1',
+            'check': 'Boolean',
+          },
+        ],
+        'message3': '%1',
+        'args3': [
+          {
+            'type': 'input_statement',
+            'name': 'DO1',
+          },
+        ],
+        'message4': 'else',
+        'message5': '%1',
+        'args5': [
+          {
+            'type': 'input_statement',
+            'name': 'ELSE',
+          },
+        ],
+        'previousStatement': null,
+        'nextStatement': null,
+      },
 ]
 
 
@@ -157,4 +201,21 @@ Blockly.JavaScript['controls_forever'] = function(block) {
 Blockly.JavaScript['controls_break'] = function(block) {
   
   return 'break;\n';
+};
+
+Blockly.JavaScript['controls_ifelseif'] = function(block) {
+  // If/elseif/else condition.
+  const if0 = Blockly.JavaScript.valueToCode(block, 'IF0', Blockly.JavaScript.ORDER_NONE) || 'false';
+  const if1 = Blockly.JavaScript.valueToCode(block, 'IF1', Blockly.JavaScript.ORDER_NONE) || 'false';
+  const branchCode0 = Blockly.JavaScript.statementToCode(block, 'DO0');
+  const branchCode1 = Blockly.JavaScript.statementToCode(block, 'DO1');
+  const branchCode2 = Blockly.JavaScript.statementToCode(block, 'ELSE');
+
+  let code = '';
+  code += 'if (' + if0 + ') {\n' + branchCode0 + '}';
+  code += 'else if (' + if1 + ') {\n' + branchCode1 + '}';
+  code += 'else {\n' + branchCode2 + '};';
+  console.log(code)
+  
+  return code + '\n';
 };

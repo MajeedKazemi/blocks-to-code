@@ -162,13 +162,10 @@ document.addEventListener("DOMContentLoaded", function () {
       allCode.push(Blockly.JavaScript.workspaceToCode(headless));
       blocks.length = 0;
     }
-    console.log(allCode);
     
     for (var i=0; i<allCode.length; i++){
       // eval the code one by one
       var clean_code = addLoopCounter(allCode[i])
-      
-      
       eval("(async () => {" + clean_code + "})()");
     }
     }
@@ -243,7 +240,19 @@ document.addEventListener("DOMContentLoaded", function () {
     simplifiedUpdateToolbox(workspace);
   });
 
-
+  document.getElementById("ifelseif_upgrade").addEventListener('change', () => {
+    var block = {kind: 'block', type: 'controls_ifelseif', enabled: true};
+    if (document.getElementById("ifelseif_upgrade").checked){
+      // add
+      toolbox.contents[2].contents.splice(2,0,block);
+    }
+    else {
+      // remove
+      toolbox.contents[2].contents.splice(2,1);
+      console.log(toolbox);
+    }
+    simplifiedUpdateToolbox(workspace);
+  })
 });
 
 Blockly.defineBlocksWithJsonArray(control);
