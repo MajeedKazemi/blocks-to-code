@@ -119,14 +119,32 @@ document.addEventListener("DOMContentLoaded", function () {
     renderer: "zelos",
   });
 
+  
+  //workspace.addChangeListener(Blockly.Events.disableOrphans);
+
   workspace.createVariable("my variable");
   
   const lang = "JavaScript";
 
   document.getElementById("run-button").addEventListener("click", function () {
     const code = Blockly[lang].workspaceToCode(workspace);
-    console.log(code);
-    eval("(async () => {" + code + "})()");
+    
+    var code_arr = code.split('// when flag clicked, execute below');
+    
+    for (var i = 0; i < topBlocks.length; i++) {
+      var topBlock = topBlocks[i];
+      if (topBlock.type !== "event_whenflagclicked") {
+        topBlock.setEnabled(false);
+      }
+    }
+    if (code_arr.length==1) return;
+    else {
+      for (var i=1; i<code_arr.length; i++){
+        // eval the code one by one
+        eval("(async () => {" + code_arr[i] + "})()");
+      }
+    }
+    
   });
 
   document.getElementById("clear-workspace-button").addEventListener("click", function () {
@@ -197,37 +215,6 @@ document.addEventListener("DOMContentLoaded", function () {
     simplifiedUpdateToolbox(workspace);
   });
 
-  document.getElementById("upgrade-button").addEventListener("click", function () {
-    // upgrade say to print
-    
-    // to be implemented: update toolbox
-    Blockly.defineBlocksWithJsonArray([{
-      "type": 'text_print',
-      "colour": "#5CB1D6",
-      'message0': "print %1",
-      'args0': [
-        {
-          'type': 'input_value',
-          'name': 'TEXT',
-        },
-      ],
-      'previousStatement': null,
-      'nextStatement': null,
-      'tooltip': '%{BKY_TEXT_PRINT_TOOLTIP',
-      'helpUrl': '%{BKY_TEXT_PRINT_HELPURL',
-    },
-    ])
-    workspace.updateToolbox(helperToolbox);
-    workspace.refreshToolboxSelection()
-    
-    workspace.updateToolbox(toolbox);
-    workspace.refreshToolboxSelection()
-
-    var xml = Blockly.Xml.workspaceToDom(workspace);
-    workspace.clear();
-    Blockly.Xml.domToWorkspace(xml, workspace);
-
-  });
 
 });
 
