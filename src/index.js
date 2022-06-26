@@ -54,7 +54,13 @@ function addLoopCounter(code){
   // add an if statement at every other line to check the counter
   
   var new_code = "var hidden_loop_counter = 0;" + code;
-  new_code = new_code.replaceAll(";", "; if (hidden_loop_counter==1000) return; hidden_loop_counter+=1; ");
+  var output_code = `
+  var divConsole = document.getElementById("console");
+  var content = document.createTextNode('Overflow: Too many lines to execute!');
+  divConsole.appendChild(content);
+  divConsole.innerHTML += '<br>';`
+  var replacement_code = "; if (hidden_loop_counter==1000) {" + output_code + "return;}; hidden_loop_counter+=1; "
+  new_code = new_code.replaceAll(";", replacement_code);
   return new_code;
 }
 
@@ -161,8 +167,7 @@ document.addEventListener("DOMContentLoaded", function () {
     for (var i=0; i<allCode.length; i++){
       // eval the code one by one
       var clean_code = addLoopCounter(allCode[i])
-      console.log("here")
-      console.log(clean_code);
+      
       
       eval("(async () => {" + clean_code + "})()");
     }
