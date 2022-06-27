@@ -258,17 +258,17 @@ export var toolbox = {
             "inputs": {
               "A": {
                 "shadow": {
-                  "type": "math_number",
+                  "type": "text",
                   "fields": {
-                    "NUM": ""
+                    "TEXT": "0"
                   }
                 }
               },
               "B": {
                 "shadow": {
-                  "type": "math_number",
+                  "type": "text",
                   "fields": {
-                    "NUM": "50"
+                    "TEXT": "50"
                   }
                 }
               },
