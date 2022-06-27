@@ -246,10 +246,42 @@ document.addEventListener("DOMContentLoaded", function () {
     var code = "await getValueFromUserInput()";
         return [code, Blockly.JavaScript.ORDER_ATOMIC];
       };
+      
+      
+
+      console.log("enter")
+      var thisBlock = workspace.getBlocksByType("sensing_askandwait")[0];
+      var parentBlock = workspace.newBlock('fix_it_statement');
+      console.log("enter")
+      parentBlock.initSvg();
+      parentBlock.render();
+
+      
+
+
+      console.log("enter")
+      thisBlock.getPreviousBlock().nextConnection.connect(parentBlock.previousConnection);
+
       sensing_askandwait_block.upgrade(new_definition, new_generator);
       Blockly.defineBlocksWithJsonArray([new_definition]);
       Blockly.JavaScript["sensing_askandwait"] = new_generator;
       toolbox.contents[0].contents.splice(2,1);
+      
+      console.log("exit")
+     
+      var parentConnection = parentBlock.getInput('TEXT').connection;
+      var childConnection = thisBlock.outputConnection;
+      parentConnection.connect(childConnection);
+
+      
+      simplifiedUpdateToolbox(workspace);
+      
+    
+      
+      
+
+
+
     }
     else {
       // original
@@ -258,8 +290,9 @@ document.addEventListener("DOMContentLoaded", function () {
       Blockly.defineBlocksWithJsonArray([original_definition]);
       var block = {kind: 'block', type: 'sensing_answer', enabled: true};
       toolbox.contents[0].contents.splice(2,0,block);
+      simplifiedUpdateToolbox(workspace);
     }
-    simplifiedUpdateToolbox(workspace);
+    
   });
 
   document.getElementById("ifelseif_upgrade").addEventListener('change', () => {

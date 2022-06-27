@@ -46,7 +46,7 @@ export var inputoutput = [
   {
     "type": 'fix_it_statement',
     "colour": "#42f555",
-    'message0': "fix it",
+    'message0': "fix it %1",
     'args0': [
       {
         'type': 'input_value',
