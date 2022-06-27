@@ -166,7 +166,7 @@ document.addEventListener("DOMContentLoaded", function () {
     for (var i=0; i<allCode.length; i++){
       // eval the code one by one
       var clean_code = addLoopCounter(allCode[i])
-      clean_code = clean_code.replaceAll("await getValueFromUserInput());", 'await getValueFromUserInput()); document.getElementById("user-input-form").style.visibility = "hidden";')
+      clean_code += 'document.getElementById("user-input-form").style.visibility = "hidden";'
       console.log(clean_code)
       eval("(async () => {" + clean_code + "})()");
     }
