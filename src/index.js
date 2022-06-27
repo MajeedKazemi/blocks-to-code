@@ -53,7 +53,7 @@ function addLoopCounter(code){
   // add a counter variable at the start of the code
   // add an if statement at every other line to check the counter
   
-  var new_code = "var hidden_loop_counter = 0;" + code;
+  var new_code = "var hidden_loop_counter = 0;\n" + code;
   var output_code = `
   var divConsole = document.getElementById("console");
   var content = document.createTextNode('Overflow: Too many lines to execute!');
@@ -166,6 +166,7 @@ document.addEventListener("DOMContentLoaded", function () {
     for (var i=0; i<allCode.length; i++){
       // eval the code one by one
       var clean_code = addLoopCounter(allCode[i])
+      clean_code = clean_code.replaceAll("await getValueFromUserInput());", 'await getValueFromUserInput()); document.getElementById("user-input-form").style.visibility = "hidden";')
       console.log(clean_code)
       eval("(async () => {" + clean_code + "})()");
     }
@@ -226,18 +227,37 @@ document.addEventListener("DOMContentLoaded", function () {
             "name": "TEXT",
           },
         ],
-        "previousStatement": null,
-        "nextStatement": null,
+        'output': 'String',
+        
       };
-      var new_generator = sensing_askandwait_block.getBlockGenerator()
+      var new_generator = function (block) {
+        const msg = Blockly.JavaScript.valueToCode(block, "TEXT", Blockly.JavaScript.ORDER_NONE) || "''";
+      
+        const sec = Blockly.JavaScript.valueToCode(block, "second", Blockly.JavaScript.ORDER_NONE) || "''";
+        
+        var console_div = document.getElementById("console");
+        var input_label = document.getElementById("label");
+
+        
+    
+    input_label.textContent = msg;
+    var input_form = document.getElementById("user-input-form");
+    input_form.style.visibility = "visible";
+    var code = "await getValueFromUserInput()";
+        return [code, Blockly.JavaScript.ORDER_ATOMIC];
+      };
       sensing_askandwait_block.upgrade(new_definition, new_generator);
-      Blockly.defineBlocksWithJsonArray([new_definition])
+      Blockly.defineBlocksWithJsonArray([new_definition]);
+      Blockly.JavaScript["sensing_askandwait"] = new_generator;
+      toolbox.contents[0].contents.splice(2,1);
     }
     else {
       // original
       var original_definition = sensing_askandwait_block.getBlockDefinition(1);
       var original_generator = sensing_askandwait_block.getBlockGenerator(1);
       Blockly.defineBlocksWithJsonArray([original_definition]);
+      var block = {kind: 'block', type: 'sensing_answer', enabled: true};
+      toolbox.contents[0].contents.splice(2,0,block);
     }
     simplifiedUpdateToolbox(workspace);
   });

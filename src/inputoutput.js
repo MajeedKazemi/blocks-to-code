@@ -44,6 +44,19 @@ export var inputoutput = [
     'extensions': ['parent_tooltip_when_inline'],
   },
   {
+    "type": 'fix_it_statement',
+    "colour": "#42f555",
+    'message0': "fix it",
+    'args0': [
+      {
+        'type': 'input_value',
+        'name': 'TEXT',
+      },
+    ],
+    'previousStatement': null,
+    'nextStatement': null,
+  },
+  {
     "type": 'text_print',
     "colour": "#5CB1D6",
     'message0': "say %1",
