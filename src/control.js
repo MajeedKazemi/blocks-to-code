@@ -185,6 +185,7 @@ Blockly.JavaScript['controls_whileUntil'] = function(block) {
       'false';
   let branch = Blockly.JavaScript.statementToCode(block, 'DO');
   branch = Blockly.JavaScript.addLoopTrap(branch, block);
+  branch += "// in_loop"
   if (until) {
     argument0 = '!' + argument0;
   }
@@ -195,6 +196,7 @@ Blockly.JavaScript['controls_forever'] = function(block) {
   
   let branch = Blockly.JavaScript.statementToCode(block, 'DO');
   branch = Blockly.JavaScript.addLoopTrap(branch, block);
+  branch += "// in_loop"
   return 'while (true) {\n' + branch + '}\n';
 };
 

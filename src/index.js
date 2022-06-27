@@ -59,8 +59,8 @@ function addLoopCounter(code){
   var content = document.createTextNode('Overflow: Too many lines to execute!');
   divConsole.appendChild(content);
   divConsole.innerHTML += '<br>';`
-  var replacement_code = "; if (hidden_loop_counter==1000) {" + output_code + "return;}; hidden_loop_counter+=1; "
-  new_code = new_code.replaceAll(";", replacement_code);
+  var replacement_code = "if (hidden_loop_counter==100) {" + output_code + "return;}; hidden_loop_counter+=1; "
+  new_code = new_code.replaceAll("// in_loop", replacement_code);
   return new_code;
 }
 
@@ -166,10 +166,12 @@ document.addEventListener("DOMContentLoaded", function () {
     for (var i=0; i<allCode.length; i++){
       // eval the code one by one
       var clean_code = addLoopCounter(allCode[i])
+      console.log(clean_code)
       eval("(async () => {" + clean_code + "})()");
     }
+
+    document.getElementById("console").scrollTop = document.getElementById("console").scrollHeight;
     }
-    
   );
 
   document.getElementById("clear-workspace-button").addEventListener("click", function () {
