@@ -15,7 +15,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { ContinuousFlyout, ContinuousMetrics, ContinuousToolbox } from "@blockly/continuous-toolbox";
+import {
+  ContinuousFlyout,
+  ContinuousMetrics,
+  ContinuousToolbox,
+} from "@blockly/continuous-toolbox";
 import * as Blockly from "blockly";
 
 import { control } from "./control.js";
@@ -26,14 +30,14 @@ import { toolbox, helperToolbox } from "./toolbox.js";
 import { variables } from "./variables.js";
 import { text_print_block, sensing_askandwait_block } from "./blocks.js";
 
-function simplifiedUpdateToolbox(workspace){
+function simplifiedUpdateToolbox(workspace) {
   // save all variables before resetting toolbox & workspace
   var all_variables = workspace.getAllVariables();
 
   // clear toolbox using blank, helper toolbox
   workspace.updateToolbox(helperToolbox);
-  workspace.refreshToolboxSelection()
-  
+  workspace.refreshToolboxSelection();
+
   // reload toolbox with (modified) toolbox
   workspace.updateToolbox(toolbox);
   workspace.refreshToolboxSelection();
@@ -44,75 +48,88 @@ function simplifiedUpdateToolbox(workspace){
   Blockly.Xml.domToWorkspace(xml, workspace);
 
   // reload variables to toolbox
-  for (var i=0; i<all_variables.length; i++){
-    workspace.createVariable(all_variables[i].name,all_variables[i].type,all_variables[i].id )
+  for (var i = 0; i < all_variables.length; i++) {
+    workspace.createVariable(
+      all_variables[i].name,
+      all_variables[i].type,
+      all_variables[i].id
+    );
   }
 }
 
-function addLoopCounter(code){
+function addLoopCounter(code) {
   // add a counter variable at the start of the code
   // add an if statement at every other line to check the counter
-  
+
   var new_code = "var hidden_loop_counter = 0;\n" + code;
   var output_code = `
   var divConsole = document.getElementById("console");
   var content = document.createTextNode('Overflow: Too many lines to execute!');
   divConsole.appendChild(content);
-  divConsole.innerHTML += '<br>';`
-  var replacement_code = "if (hidden_loop_counter==100) {" + output_code + "return;}; hidden_loop_counter+=1; "
+  divConsole.innerHTML += '<br>';`;
+  var replacement_code =
+    "if (hidden_loop_counter==100) {" +
+    output_code +
+    "return;}; hidden_loop_counter+=1; ";
   new_code = new_code.replaceAll("// in_loop", replacement_code);
   return new_code;
 }
 
-var customVariableCategory = function(workspace) {
-  const variableModelList = workspace.getVariablesOfType('');
+var customVariableCategory = function (workspace) {
+  const variableModelList = workspace.getVariablesOfType("");
 
   const xmlList = [];
   if (variableModelList.length > 0) {
     // New variables are added to the end of the variableModelList.
     const mostRecentVariable = variableModelList[variableModelList.length - 1];
-    if (Blockly.Blocks['variables_set']) {
-      const block = Blockly.utils.xml.createElement('block');
-      block.setAttribute('type', 'variables_set');
-      block.setAttribute('gap', Blockly.Blocks['math_change'] ? 8 : 24);
-      block.appendChild(Blockly.Variables.generateVariableFieldDom(mostRecentVariable));
+    if (Blockly.Blocks["variables_set"]) {
+      const block = Blockly.utils.xml.createElement("block");
+      block.setAttribute("type", "variables_set");
+      block.setAttribute("gap", Blockly.Blocks["math_change"] ? 8 : 24);
+      block.appendChild(
+        Blockly.Variables.generateVariableFieldDom(mostRecentVariable)
+      );
       const value = Blockly.Xml.textToDom(
         '<value name="VALUE">' +
-        '<shadow type="math_number">' +
-        '<field name="NUM">0</field>' +
-        '</shadow>' +
-        '</value>');
-    block.appendChild(value);
+          '<shadow type="math_number">' +
+          '<field name="NUM">0</field>' +
+          "</shadow>" +
+          "</value>"
+      );
+      block.appendChild(value);
       xmlList.push(block);
     }
-    if (Blockly.Blocks['math_change']) {
-      const block = Blockly.utils.xml.createElement('block');
-      block.setAttribute('type', 'math_change');
-      block.setAttribute('gap', Blockly.Blocks['variables_get'] ? 20 : 8);
-      block.appendChild(Blockly.Variables.generateVariableFieldDom(mostRecentVariable));
+    if (Blockly.Blocks["math_change"]) {
+      const block = Blockly.utils.xml.createElement("block");
+      block.setAttribute("type", "math_change");
+      block.setAttribute("gap", Blockly.Blocks["variables_get"] ? 20 : 8);
+      block.appendChild(
+        Blockly.Variables.generateVariableFieldDom(mostRecentVariable)
+      );
       const value = Blockly.Xml.textToDom(
-          '<value name="DELTA">' +
+        '<value name="DELTA">' +
           '<shadow type="math_number">' +
           '<field name="NUM">1</field>' +
-          '</shadow>' +
-          '</value>');
+          "</shadow>" +
+          "</value>"
+      );
       block.appendChild(value);
       xmlList.push(block);
     }
 
-    if (Blockly.Blocks['variables_get']) {
+    if (Blockly.Blocks["variables_get"]) {
       variableModelList.sort(Blockly.VariableModel.compareByName);
       for (let i = 0, variable; (variable = variableModelList[i]); i++) {
-        const block = Blockly.utils.xml.createElement('block');
-        block.setAttribute('type', 'variables_get');
-        block.setAttribute('gap', 8);
+        const block = Blockly.utils.xml.createElement("block");
+        block.setAttribute("type", "variables_get");
+        block.setAttribute("gap", 8);
         block.appendChild(Blockly.Variables.generateVariableFieldDom(variable));
         xmlList.push(block);
       }
     }
   }
   return xmlList;
-}
+};
 Blockly.Variables.flyoutCategoryBlocks = customVariableCategory;
 
 /**
@@ -120,7 +137,6 @@ Blockly.Variables.flyoutCategoryBlocks = customVariableCategory;
  *               defaults: (English lang & JavaScript generator).
  * @author samelh@google.com (Sam El-Husseini)
  */
-
 
 document.addEventListener("DOMContentLoaded", function () {
   const workspace = Blockly.inject("blockly-container", {
@@ -135,7 +151,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   workspace.createVariable("my variable");
-  
+
   const lang = "JavaScript";
 
   document.getElementById("run-button").addEventListener("click", function () {
@@ -144,16 +160,15 @@ document.addEventListener("DOMContentLoaded", function () {
     var json = Blockly.serialization.workspaces.save(workspace);
 
     // Store top blocks separately, and remove them from the JSON.
-    var blocks = json['blocks']['blocks'];
-    var topBlocks = blocks.slice();  // Create shallow copy.
-    
-    
+    var blocks = json["blocks"]["blocks"];
+    var topBlocks = blocks.slice(); // Create shallow copy.
+
     blocks.length = 0;
 
     // Load each block into the workspace individually and generate code.
     var allCode = [];
     var headless = new Blockly.Workspace();
-    
+
     for (var i = 0; i < topBlocks.length; i++) {
       if (topBlocks[i].type != "event_whenflagclicked") continue;
       var block = topBlocks[i];
@@ -162,50 +177,54 @@ document.addEventListener("DOMContentLoaded", function () {
       allCode.push(Blockly.JavaScript.workspaceToCode(headless));
       blocks.length = 0;
     }
-    
-    for (var i=0; i<allCode.length; i++){
+
+    for (var i = 0; i < allCode.length; i++) {
       // eval the code one by one
-      var clean_code = addLoopCounter(allCode[i])
-      clean_code += 'document.getElementById("user-input-form").style.visibility = "hidden";'
-      console.log(clean_code)
+      var clean_code = addLoopCounter(allCode[i]);
+      clean_code +=
+        'document.getElementById("user-input-form").style.visibility = "hidden";';
+      console.log(clean_code);
       eval("(async () => {" + clean_code + "})()");
     }
 
-    document.getElementById("console").scrollTop = document.getElementById("console").scrollHeight;
-    }
-  );
-
-  document.getElementById("clear-workspace-button").addEventListener("click", function () {
-    workspace.clear()
+    document.getElementById("console").scrollTop =
+      document.getElementById("console").scrollHeight;
   });
 
-  document.getElementById("clear-console-button").addEventListener("click", function () {
-    document.getElementById("console").textContent = "";
-  });
+  document
+    .getElementById("clear-workspace-button")
+    .addEventListener("click", function () {
+      workspace.clear();
+    });
 
-  document.getElementById("print_upgrade").addEventListener('change', () => {
-    if (document.getElementById("print_upgrade").checked){
+  document
+    .getElementById("clear-console-button")
+    .addEventListener("click", function () {
+      document.getElementById("console").textContent = "";
+    });
+
+  document.getElementById("print_upgrade").addEventListener("change", () => {
+    if (document.getElementById("print_upgrade").checked) {
       // upgrade
       var new_definition = {
-        "type": 'text_print',
-        "colour": "#5CB1D6",
-        'message0': "print %1",
-        'args0': [
+        type: "text_print",
+        colour: "#5CB1D6",
+        message0: "print %1",
+        args0: [
           {
-            'type': 'input_value',
-            'name': 'TEXT',
+            type: "input_value",
+            name: "TEXT",
           },
         ],
-        'previousStatement': null,
-        'nextStatement': null,
-        'tooltip': '%{BKY_TEXT_PRINT_TOOLTIP',
-        'helpUrl': '%{BKY_TEXT_PRINT_HELPURL',
+        previousStatement: null,
+        nextStatement: null,
+        tooltip: "%{BKY_TEXT_PRINT_TOOLTIP",
+        helpUrl: "%{BKY_TEXT_PRINT_HELPURL",
       };
-      var new_generator = text_print_block.getBlockGenerator()
+      var new_generator = text_print_block.getBlockGenerator();
       text_print_block.upgrade(new_definition, new_generator);
-      Blockly.defineBlocksWithJsonArray([new_definition])
-    }
-    else {
+      Blockly.defineBlocksWithJsonArray([new_definition]);
+    } else {
       // original
       var original_definition = text_print_block.getBlockDefinition(1);
       var original_generator = text_print_block.getBlockGenerator(1);
@@ -214,100 +233,125 @@ document.addEventListener("DOMContentLoaded", function () {
     simplifiedUpdateToolbox(workspace);
   });
 
-  document.getElementById("input_upgrade").addEventListener('change', () => {
-    if (document.getElementById("input_upgrade").checked){
+  document.getElementById("input_upgrade").addEventListener("change", () => {
+    if (document.getElementById("input_upgrade").checked) {
       // upgrade
       var new_definition = {
-        "type": "sensing_askandwait",
-        "colour": "#5CB1D6",
-        "message0": "input %1",
-        "args0": [
+        type: "sensing_askandwait",
+        colour: "#5CB1D6",
+        message0: "input %1",
+        args0: [
           {
-            "type": "input_value",
-            "name": "TEXT",
+            type: "input_value",
+            name: "TEXT",
           },
         ],
-        'output': 'String',
-        
+        output: "String",
       };
+
       var new_generator = function (block) {
-        const msg = Blockly.JavaScript.valueToCode(block, "TEXT", Blockly.JavaScript.ORDER_NONE) || "''";
-      
-        const sec = Blockly.JavaScript.valueToCode(block, "second", Blockly.JavaScript.ORDER_NONE) || "''";
-        
+        const msg =
+          Blockly.JavaScript.valueToCode(
+            block,
+            "TEXT",
+            Blockly.JavaScript.ORDER_NONE
+          ) || "''";
+
+        const sec =
+          Blockly.JavaScript.valueToCode(
+            block,
+            "second",
+            Blockly.JavaScript.ORDER_NONE
+          ) || "''";
+
         var console_div = document.getElementById("console");
         var input_label = document.getElementById("label");
 
-        
-    
-    input_label.textContent = msg;
-    var input_form = document.getElementById("user-input-form");
-    input_form.style.visibility = "visible";
-    var code = "await getValueFromUserInput()";
+        input_label.textContent = msg;
+        var input_form = document.getElementById("user-input-form");
+        input_form.style.visibility = "visible";
+        var code = "await getValueFromUserInput()";
         return [code, Blockly.JavaScript.ORDER_ATOMIC];
       };
-      
-      
 
-      console.log("enter")
       var thisBlock = workspace.getBlocksByType("sensing_askandwait")[0];
-      var parentBlock = workspace.newBlock('fix_it_statement');
-      console.log("enter")
-      parentBlock.initSvg();
-      parentBlock.render();
-
-      
-
-
-      console.log("enter")
-      thisBlock.getPreviousBlock().nextConnection.connect(parentBlock.previousConnection);
+      var question =
+        Blockly.JavaScript.valueToCode(
+          thisBlock,
+          "TEXT",
+          Blockly.JavaScript.ORDER_NONE
+        ) || "What's your name?";
+      question = question.replaceAll("\\", "");
+      question = question.slice(1, -1);
+      var fixBlock = workspace.newBlock("fix_it_statement");
 
       sensing_askandwait_block.upgrade(new_definition, new_generator);
       Blockly.defineBlocksWithJsonArray([new_definition]);
       Blockly.JavaScript["sensing_askandwait"] = new_generator;
-      toolbox.contents[0].contents.splice(2,1);
-      
-      console.log("exit")
-     
-      var parentConnection = parentBlock.getInput('TEXT').connection;
-      var childConnection = thisBlock.outputConnection;
-      parentConnection.connect(childConnection);
+      toolbox.contents[0].contents.splice(2, 1);
 
-      
+      var newInputBlock = workspace.newBlock("sensing_askandwait");
+
+      newInputBlock.initSvg();
+      newInputBlock.render();
+
+      var newText = workspace.newBlock("text");
+      newText.setFieldValue(question, "TEXT");
+      newText.initSvg();
+      newText.render();
+      newText.outputConnection.connect(
+        newInputBlock.getInput("TEXT").connection
+      );
+      newInputBlock.outputConnection.connect(
+        fixBlock.getInput("TEXT").connection
+      );
+
+      fixBlock.initSvg();
+      fixBlock.render();
+      //console.log(thisBlock.getInput("TEXT"));
+
+      thisBlock
+        .getPreviousBlock()
+        .nextConnection.connect(fixBlock.previousConnection);
+
+      thisBlock
+        .getNextBlock()
+        .previousConnection.connect(fixBlock.nextConnection);
+
+      //thisBlock.nextConnection = null;
+      //thisBlock.previousConnection = null;
+      thisBlock.dispose(false);
+
+      //thisBlock.outputConnection.connect(fixBlock.getInput("TEXT").connection);
+
+      //var parentConnection = fixBlock.getInput("TEXT").connection;
+      //var childConnection = thisBlock.outputConnection;
+      //parentConnection.connect(childConnection);
+
       simplifiedUpdateToolbox(workspace);
-      
-    
-      
-      
-
-
-
-    }
-    else {
+    } else {
       // original
       var original_definition = sensing_askandwait_block.getBlockDefinition(1);
       var original_generator = sensing_askandwait_block.getBlockGenerator(1);
       Blockly.defineBlocksWithJsonArray([original_definition]);
-      var block = {kind: 'block', type: 'sensing_answer', enabled: true};
-      toolbox.contents[0].contents.splice(2,0,block);
+      var block = { kind: "block", type: "sensing_answer", enabled: true };
+      toolbox.contents[0].contents.splice(2, 0, block);
       simplifiedUpdateToolbox(workspace);
     }
-    
   });
 
-  document.getElementById("ifelseif_upgrade").addEventListener('change', () => {
-    var block = {kind: 'block', type: 'controls_ifelseif', enabled: true};
-    if (document.getElementById("ifelseif_upgrade").checked){
+  document.getElementById("ifelseif_upgrade").addEventListener("change", () => {
+    var block = { kind: "block", type: "controls_ifelseif", enabled: true };
+    if (document.getElementById("ifelseif_upgrade").checked) {
       // add
-      toolbox.contents[2].contents.splice(2,0,block);
-    }
-    else {
+      toolbox.contents[2].contents.splice(2, 0, block);
+    } else {
       // remove
-      toolbox.contents[2].contents.splice(2,1);
+      toolbox.contents[2].contents.splice(2, 1);
       console.log(toolbox);
     }
     simplifiedUpdateToolbox(workspace);
-  })
+  });
 });
 
 Blockly.defineBlocksWithJsonArray(control);
@@ -315,9 +359,6 @@ Blockly.defineBlocksWithJsonArray(variables);
 Blockly.defineBlocksWithJsonArray(inputoutput);
 Blockly.defineBlocksWithJsonArray(operator);
 Blockly.defineBlocksWithJsonArray(event);
-
-
-
 
 /**
  * the getValueFromUserInput() function is called within the `sensing_askandwait` block
