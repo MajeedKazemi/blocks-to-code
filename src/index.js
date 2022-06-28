@@ -31,6 +31,8 @@ import { variables } from "./variables.js";
 import { text_print_block, sensing_askandwait_block } from "./blocks.js";
 
 function simplifiedUpdateToolbox(workspace) {
+  // helper function to refresh toolbox and workspace
+
   // save all variables before resetting toolbox & workspace
   var all_variables = workspace.getAllVariables();
 
@@ -58,30 +60,48 @@ function simplifiedUpdateToolbox(workspace) {
 }
 
 function addLoopCounter(code) {
-  // add a counter variable at the start of the code
-  // add an if statement at every other line to check the counter
+  // helper function to add a counter variable at start of the code
+  // this counter is used to break infinite loops
 
+  // add counter called hidden_loop_counter
   var new_code = "var hidden_loop_counter = 0;\n" + code;
+
+  // code to output an Overflow message
   var output_code = `
   var divConsole = document.getElementById("console");
   var content = document.createTextNode('Overflow: Too many lines to execute!');
   divConsole.appendChild(content);
   divConsole.innerHTML += '<br>';`;
+
+  // code to append to loop statements
+  // if counter reaches a MAX, break the loop by return
   var replacement_code =
     "if (hidden_loop_counter==100) {" +
     output_code +
     "return;}; hidden_loop_counter+=1; ";
+
+  // the code above is added at the '// in_loop' marker
+  // this marker is set in the generator code of all types of loops
   new_code = new_code.replaceAll("// in_loop", replacement_code);
+
+  // return code that contains protection from infinite loop
   return new_code;
 }
 
+// basic scratch blocks in the toolbox are defined statically, in toolbox.js
+// the variable category is defined dynamically, as variables can be added during runtime
+// the code below implements the dynamic filling of the variable category
 var customVariableCategory = function (workspace) {
+  // get all variables
   const variableModelList = workspace.getVariablesOfType("");
 
+  // init xml
   const xmlList = [];
+
   if (variableModelList.length > 0) {
     // New variables are added to the end of the variableModelList.
     const mostRecentVariable = variableModelList[variableModelList.length - 1];
+
     if (Blockly.Blocks["variables_set"]) {
       const block = Blockly.utils.xml.createElement("block");
       block.setAttribute("type", "variables_set");
@@ -116,7 +136,6 @@ var customVariableCategory = function (workspace) {
       block.appendChild(value);
       xmlList.push(block);
     }
-
     if (Blockly.Blocks["variables_get"]) {
       variableModelList.sort(Blockly.VariableModel.compareByName);
       for (let i = 0, variable; (variable = variableModelList[i]); i++) {
@@ -130,15 +149,13 @@ var customVariableCategory = function (workspace) {
   }
   return xmlList;
 };
+
+// build variable category
 Blockly.Variables.flyoutCategoryBlocks = customVariableCategory;
 
-/**
- * @fileoverview Example of including Blockly with using Webpack with
- *               defaults: (English lang & JavaScript generator).
- * @author samelh@google.com (Sam El-Husseini)
- */
-
+// ---------- MAIN FUNCTION: DOM LOADED EVENT ----------
 document.addEventListener("DOMContentLoaded", function () {
+  // inject blockly
   const workspace = Blockly.inject("blockly-container", {
     plugins: {
       toolbox: ContinuousToolbox,
@@ -150,25 +167,29 @@ document.addEventListener("DOMContentLoaded", function () {
     renderer: "zelos",
   });
 
+  // create one initial variable (as scratch does)
   workspace.createVariable("my variable");
 
+  // generator language set to JavaScript
   const lang = "JavaScript";
 
+  // ---------- FLAG/RUN BUTTON CLICKED EVENT ----------
   document.getElementById("run-button").addEventListener("click", function () {
+    // convert workspace blocks to code
     const code = Blockly[lang].workspaceToCode(workspace);
-
     var json = Blockly.serialization.workspaces.save(workspace);
 
     // Store top blocks separately, and remove them from the JSON.
     var blocks = json["blocks"]["blocks"];
     var topBlocks = blocks.slice(); // Create shallow copy.
-
     blocks.length = 0;
 
     // Load each block into the workspace individually and generate code.
     var allCode = [];
     var headless = new Blockly.Workspace();
 
+    // loop thru topBlocks to check if it is 'event_whenflagclicked'
+    // ignore blocks that do not start with the 'event_whenflagclicked' block
     for (var i = 0; i < topBlocks.length; i++) {
       if (topBlocks[i].type != "event_whenflagclicked") continue;
       var block = topBlocks[i];
@@ -178,34 +199,47 @@ document.addEventListener("DOMContentLoaded", function () {
       blocks.length = 0;
     }
 
+    // parallel execution of blocks that start with the 'event_whenflagclicked' block
     for (var i = 0; i < allCode.length; i++) {
-      // eval the code one by one
+      // add infinite loop protection to make the code "clean"
       var clean_code = addLoopCounter(allCode[i]);
+
+      // hide the user-input-form after execution
       clean_code +=
         'document.getElementById("user-input-form").style.visibility = "hidden";';
+
+      // log the code that is run
       console.log(clean_code);
+
+      // run the code
       eval("(async () => {" + clean_code + "})()");
     }
 
+    // ensure that the console-div is always showing the latest output
     document.getElementById("console").scrollTop =
       document.getElementById("console").scrollHeight;
   });
 
+  // clear workspace button
   document
     .getElementById("clear-workspace-button")
     .addEventListener("click", function () {
       workspace.clear();
     });
 
+  // clear console button
   document
     .getElementById("clear-console-button")
     .addEventListener("click", function () {
       document.getElementById("console").textContent = "";
     });
 
+  // -------------------- BELOW ARE EXPERIMENTAL FEATURES --------------------
+
+  // print upgrade
   document.getElementById("print_upgrade").addEventListener("change", () => {
     if (document.getElementById("print_upgrade").checked) {
-      // upgrade
+      // new definition for the print statement
       var new_definition = {
         type: "text_print",
         colour: "#5CB1D6",
@@ -221,17 +255,39 @@ document.addEventListener("DOMContentLoaded", function () {
         tooltip: "%{BKY_TEXT_PRINT_TOOLTIP",
         helpUrl: "%{BKY_TEXT_PRINT_HELPURL",
       };
-      var new_generator = text_print_block.getBlockGenerator();
+
+      // new generator for the print statement
+      var new_generator = text_print_block.getBlockGenerator(); // happens to be the same
+
+      // run the upgrade method of the object/class
       text_print_block.upgrade(new_definition, new_generator);
+
+      // actually execute the definition change
       Blockly.defineBlocksWithJsonArray([new_definition]);
+
+      // actually execute the generator change
+      // Blockly.JavaScript["text_print"] = new_generator; // happens to be the same
     } else {
-      // original
+      // original definition for the print statement
       var original_definition = text_print_block.getBlockDefinition(1);
-      var original_generator = text_print_block.getBlockGenerator(1);
+
+      // original generator for the print statement
+      //var original_generator = text_print_block.getBlockGenerator(1); // happens to be the same
+
+      // actually execute the definition change
       Blockly.defineBlocksWithJsonArray([original_definition]);
+
+      // actually execute the generator change
+      // Blockly.JavaScript["text_print"] = original_generator; // happens to be the same
     }
+
+    // update toolbox & workspace
     simplifiedUpdateToolbox(workspace);
   });
+
+  // input upgrade
+  // I managed to make it work, but it's too messy.
+  // Don't bother reading it
 
   document.getElementById("input_upgrade").addEventListener("change", () => {
     if (document.getElementById("input_upgrade").checked) {
