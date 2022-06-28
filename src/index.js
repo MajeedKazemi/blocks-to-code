@@ -274,69 +274,78 @@ document.addEventListener("DOMContentLoaded", function () {
         return [code, Blockly.JavaScript.ORDER_ATOMIC];
       };
 
-      var thisBlock = workspace.getBlocksByType("sensing_askandwait")[0];
-      var question =
-        Blockly.JavaScript.valueToCode(
-          thisBlock,
-          "TEXT",
-          Blockly.JavaScript.ORDER_NONE
-        ) || "What's your name?";
-      question = question.replaceAll("\\", "");
-      question = question.slice(1, -1);
-      var fixBlock = workspace.newBlock("fix_it_statement");
+      const list_of_sensing_blocks =
+        workspace.getBlocksByType("sensing_askandwait");
+      if (list_of_sensing_blocks.length == 0) {
+        sensing_askandwait_block.upgrade(new_definition, new_generator);
+        Blockly.defineBlocksWithJsonArray([new_definition]);
+        Blockly.JavaScript["sensing_askandwait"] = new_generator;
+        toolbox.contents[0].contents.splice(2, 1);
+      } else {
+        var thisBlock = [];
+        var question = [];
+        var fixBlock = [];
+        var newInputBlock = [];
+        var newText = [];
+        for (var i = 0; i < list_of_sensing_blocks.length; i++) {
+          thisBlock.push(list_of_sensing_blocks[i]);
+          var a_question =
+            Blockly.JavaScript.valueToCode(
+              thisBlock[i],
+              "TEXT",
+              Blockly.JavaScript.ORDER_NONE
+            ) || "What's your name?";
+          a_question = a_question.replaceAll("\\", "");
+          a_question = a_question.slice(1, -1);
+          question.push(a_question);
+          fixBlock.push(workspace.newBlock("fix_it_statement"));
+        }
 
-      sensing_askandwait_block.upgrade(new_definition, new_generator);
-      Blockly.defineBlocksWithJsonArray([new_definition]);
-      Blockly.JavaScript["sensing_askandwait"] = new_generator;
-      toolbox.contents[0].contents.splice(2, 1);
+        sensing_askandwait_block.upgrade(new_definition, new_generator);
+        Blockly.defineBlocksWithJsonArray([new_definition]);
+        Blockly.JavaScript["sensing_askandwait"] = new_generator;
+        toolbox.contents[0].contents.splice(2, 1);
+        for (var i = 0; i < list_of_sensing_blocks.length; i++) {
+          var a_newInputBlock = workspace.newBlock("sensing_askandwait");
+          a_newInputBlock.initSvg();
+          a_newInputBlock.render();
 
-      var newInputBlock = workspace.newBlock("sensing_askandwait");
+          var a_newText = workspace.newBlock("text");
+          a_newText.setFieldValue(question[i], "TEXT");
+          a_newText.initSvg();
+          a_newText.render();
+          a_newText.outputConnection.connect(
+            a_newInputBlock.getInput("TEXT").connection
+          );
+          a_newInputBlock.outputConnection.connect(
+            fixBlock[i].getInput("TEXT").connection
+          );
 
-      newInputBlock.initSvg();
-      newInputBlock.render();
+          fixBlock[i].initSvg();
+          fixBlock[i].render();
 
-      var newText = workspace.newBlock("text");
-      newText.setFieldValue(question, "TEXT");
-      newText.initSvg();
-      newText.render();
-      newText.outputConnection.connect(
-        newInputBlock.getInput("TEXT").connection
-      );
-      newInputBlock.outputConnection.connect(
-        fixBlock.getInput("TEXT").connection
-      );
-
-      fixBlock.initSvg();
-      fixBlock.render();
-      //console.log(thisBlock.getInput("TEXT"));
-
-      thisBlock
-        .getPreviousBlock()
-        .nextConnection.connect(fixBlock.previousConnection);
-
-      thisBlock
-        .getNextBlock()
-        .previousConnection.connect(fixBlock.nextConnection);
-
-      //thisBlock.nextConnection = null;
-      //thisBlock.previousConnection = null;
-      thisBlock.dispose(false);
-
-      //thisBlock.outputConnection.connect(fixBlock.getInput("TEXT").connection);
-
-      //var parentConnection = fixBlock.getInput("TEXT").connection;
-      //var childConnection = thisBlock.outputConnection;
-      //parentConnection.connect(childConnection);
-
+          if (thisBlock[i].getPreviousBlock()) {
+            thisBlock[i]
+              .getPreviousBlock()
+              .nextConnection.connect(fixBlock[i].previousConnection);
+          }
+          if (thisBlock[i].getNextBlock()) {
+            thisBlock[i]
+              .getNextBlock()
+              .previousConnection.connect(fixBlock[i].nextConnection);
+          }
+          thisBlock[i].dispose(false);
+        }
+      }
+      const list_of_answer_blocks = workspace.getBlocksByType("sensing_answer");
+      for (var i = 0; i < list_of_answer_blocks.length; i++) {
+        list_of_answer_blocks[i].dispose(false);
+      }
       simplifiedUpdateToolbox(workspace);
     } else {
       // original
-      var original_definition = sensing_askandwait_block.getBlockDefinition(1);
-      var original_generator = sensing_askandwait_block.getBlockGenerator(1);
-      Blockly.defineBlocksWithJsonArray([original_definition]);
-      var block = { kind: "block", type: "sensing_answer", enabled: true };
-      toolbox.contents[0].contents.splice(2, 0, block);
-      simplifiedUpdateToolbox(workspace);
+      alert("Please don't attempt to uncheck this... It's too much work!");
+      document.getElementById("input_upgrade").checked = true;
     }
   });
 
@@ -348,7 +357,6 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       // remove
       toolbox.contents[2].contents.splice(2, 1);
-      console.log(toolbox);
     }
     simplifiedUpdateToolbox(workspace);
   });
