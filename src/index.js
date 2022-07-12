@@ -273,57 +273,21 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("input_upgrade").addEventListener("change", () => {
     if (document.getElementById("input_upgrade").checked) {
       // upgrade
-      var new_definition = {
-        type: "sensing_askandwait",
-        colour: "#5CB1D6",
-        message0: "input %1",
-        args0: [
-          {
-            type: "input_value",
-            name: "TEXT",
-          },
-        ],
-        output: "String",
-      };
-
-      var new_generator = function (block) {
-        const msg =
-          Blockly.JavaScript.valueToCode(
-            block,
-            "TEXT",
-            Blockly.JavaScript.ORDER_NONE
-          ) || "''";
-
-        const sec =
-          Blockly.JavaScript.valueToCode(
-            block,
-            "second",
-            Blockly.JavaScript.ORDER_NONE
-          ) || "''";
-
-        var console_div = document.getElementById("console");
-        var input_label = document.getElementById("label");
-
-        input_label.textContent = msg;
-        var input_form = document.getElementById("user-input-form");
-        input_form.style.visibility = "visible";
-        var code = "await getValueFromUserInput()";
-        return [code, Blockly.JavaScript.ORDER_ATOMIC];
-      };
 
       const list_of_sensing_blocks =
         workspace.getBlocksByType("sensing_askandwait");
       if (list_of_sensing_blocks.length == 0) {
-        sensing_askandwait_block.upgrade(new_definition, new_generator);
-        Blockly.defineBlocksWithJsonArray([new_definition]);
-        Blockly.JavaScript["sensing_askandwait"] = new_generator;
+        sensing_askandwait_block.upgrade();
+        Blockly.defineBlocksWithJsonArray([
+          sensing_askandwait_block.getBlockDefinition(),
+        ]);
+        Blockly.JavaScript["sensing_askandwait"] =
+          sensing_askandwait_block.getBlockGenerator();
         toolbox.contents[0].contents.splice(2, 1);
       } else {
         var thisBlock = [];
         var question = [];
         var fixBlock = [];
-        var newInputBlock = [];
-        var newText = [];
         for (var i = 0; i < list_of_sensing_blocks.length; i++) {
           thisBlock.push(list_of_sensing_blocks[i]);
           var a_question =
@@ -338,9 +302,13 @@ document.addEventListener("DOMContentLoaded", function () {
           fixBlock.push(workspace.newBlock("fix_it_statement"));
         }
 
-        sensing_askandwait_block.upgrade(new_definition, new_generator);
-        Blockly.defineBlocksWithJsonArray([new_definition]);
-        Blockly.JavaScript["sensing_askandwait"] = new_generator;
+        sensing_askandwait_block.upgrade();
+        Blockly.defineBlocksWithJsonArray([
+          sensing_askandwait_block.getBlockDefinition(),
+        ]);
+        Blockly.JavaScript["sensing_askandwait"] =
+          sensing_askandwait_block.getBlockGenerator();
+
         toolbox.contents[0].contents.splice(2, 1);
         for (var i = 0; i < list_of_sensing_blocks.length; i++) {
           var a_newInputBlock = workspace.newBlock("sensing_askandwait");
