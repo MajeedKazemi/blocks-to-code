@@ -239,46 +239,27 @@ document.addEventListener("DOMContentLoaded", function () {
   // print upgrade
   document.getElementById("print_upgrade").addEventListener("change", () => {
     if (document.getElementById("print_upgrade").checked) {
-      // new definition for the print statement
-      var new_definition = {
-        type: "text_print",
-        colour: "#5CB1D6",
-        message0: "print %1",
-        args0: [
-          {
-            type: "input_value",
-            name: "TEXT",
-          },
-        ],
-        previousStatement: null,
-        nextStatement: null,
-        tooltip: "%{BKY_TEXT_PRINT_TOOLTIP",
-        helpUrl: "%{BKY_TEXT_PRINT_HELPURL",
-      };
-
-      // new generator for the print statement
-      var new_generator = text_print_block.getBlockGenerator(); // happens to be the same
-
       // run the upgrade method of the object/class
-      text_print_block.upgrade(new_definition, new_generator);
+      text_print_block.upgrade();
 
       // actually execute the definition change
-      Blockly.defineBlocksWithJsonArray([new_definition]);
+      Blockly.defineBlocksWithJsonArray([
+        text_print_block.getBlockDefinition(),
+      ]);
 
       // actually execute the generator change
-      // Blockly.JavaScript["text_print"] = new_generator; // happens to be the same
+      Blockly.JavaScript["text_print"] = text_print_block.getBlockGenerator(); // happens to be the same
     } else {
-      // original definition for the print statement
-      var original_definition = text_print_block.getBlockDefinition(1);
-
-      // original generator for the print statement
-      //var original_generator = text_print_block.getBlockGenerator(1); // happens to be the same
+      // run the downgrade method of the object/class
+      text_print_block.downgrade(text_print_block.version - 1);
 
       // actually execute the definition change
-      Blockly.defineBlocksWithJsonArray([original_definition]);
+      Blockly.defineBlocksWithJsonArray([
+        text_print_block.getBlockDefinition(),
+      ]);
 
       // actually execute the generator change
-      // Blockly.JavaScript["text_print"] = original_generator; // happens to be the same
+      Blockly.JavaScript["text_print"] = text_print_block.getBlockGenerator(); // happens to be the same
     }
 
     // update toolbox & workspace
