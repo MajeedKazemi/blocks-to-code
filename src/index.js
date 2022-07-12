@@ -405,6 +405,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  // while upgrade
+  document.getElementById("while_upgrade").addEventListener("change", () => {
+    if (document.getElementById("while_upgrade").checked) {
+      // to do
+    } else {
+      // to do
+    }
+  });
+
   document.getElementById("ifelseif_upgrade").addEventListener("change", () => {
     var block = { kind: "block", type: "controls_ifelseif", enabled: true };
     if (document.getElementById("ifelseif_upgrade").checked) {

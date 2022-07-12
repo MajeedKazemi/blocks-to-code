@@ -63,6 +63,19 @@ export var inputoutput = [
     nextStatement: null,
   },
   {
+    type: "fix_it_boolean",
+    colour: "#42f555",
+    message0: "fix it %1",
+    args0: [
+      {
+        type: "input_value",
+        name: "TEXT",
+        check: "Boolean",
+      },
+    ],
+    output: "Boolean",
+  },
+  {
     type: "text_print",
     colour: "#5CB1D6",
     message0: "say %1",

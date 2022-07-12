@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Blocks-to-Code</title>
-    <link href="style.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet" />
   </head>
 
   <body>
@@ -14,27 +14,53 @@
         <td>
           <div>
             <button id="run-button">Flag</button>
-            <br><br>
+            <br /><br />
             <div>
-              Below are examples of *modified* blocks (check to upgrade, uncheck to downgrade)
+              Below are examples of *modified* blocks (check to upgrade, uncheck
+              to downgrade)
             </div>
             <div>
-              <input type="checkbox" id="print_upgrade" name="print_upgrade" value="print_upgrade">
+              <input
+                type="checkbox"
+                id="print_upgrade"
+                name="print_upgrade"
+                value="print_upgrade"
+              />
               <label for="print_upgrade">Print Upgrade</label>
             </div>
             <div>
-              <input type="checkbox" id="input_upgrade" name="input_upgrade" value="input_upgrade">
+              <input
+                type="checkbox"
+                id="input_upgrade"
+                name="input_upgrade"
+                value="input_upgrade"
+              />
               <label for="input_upgrade">Input Upgrade</label>
             </div>
-            <br>
             <div>
-              Below are examples of *added* blocks (check to add, uncheck to remove)
+              <input
+                type="checkbox"
+                id="while_upgrade"
+                name="while_upgrade"
+                value="while_upgrade"
+              />
+              <label for="while_upgrade">While Upgrade</label>
+            </div>
+            <br />
+            <div>
+              Below are examples of *added* blocks (check to add, uncheck to
+              remove)
             </div>
             <div>
-              <input type="checkbox" id="ifelseif_upgrade" name="ifelseif_upgrade" value="ifelseif_upgrade">
+              <input
+                type="checkbox"
+                id="ifelseif_upgrade"
+                name="ifelseif_upgrade"
+                value="ifelseif_upgrade"
+              />
               <label for="ifelseif_upgrade">If-ElseIf Upgrade</label>
             </div>
-            <br>
+            <br />
 
             <form id="user-input-form" style="visibility: hidden">
               <label id="label" for="user-input"></label>
@@ -47,7 +73,7 @@
               <button>Submit</button>
             </form>
 
-            <div id="console" style="overflow:scroll;"></div>
+            <div id="console" style="overflow: scroll"></div>
             <button id="clear-workspace-button">Clear Workspace</button>
             <button id="clear-console-button">Clear Console</button>
           </div>
