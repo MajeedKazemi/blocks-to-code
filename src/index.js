@@ -380,7 +380,9 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       simplifiedUpdateToolbox(workspace);
     } else {
-      // to do
+      // original
+      alert("Please don't attempt to uncheck this... It's too much work!");
+      document.getElementById("while_upgrade").checked = true;
     }
   });
 

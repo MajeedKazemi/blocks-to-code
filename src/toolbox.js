@@ -42,7 +42,7 @@ export var toolbox = {
     },
     {
       kind: "category",
-      colour: "#A55B80",
+      colour: "#FFBF00",
       name: "Events",
       contents: [
         {
