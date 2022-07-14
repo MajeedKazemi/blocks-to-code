@@ -303,6 +303,7 @@ document.addEventListener("DOMContentLoaded", function () {
           a_question = a_question.replaceAll("\\", "");
           a_question = a_question.slice(1, -1);
           question.push(a_question);
+          // This is where the fix_it_statement block is used
           fixBlock.push(workspace.newBlock("fix_it_statement"));
         }
 
@@ -373,6 +374,7 @@ document.addEventListener("DOMContentLoaded", function () {
         controls_whileUntil_block.getBlockGenerator();
       for (var i = 0; i < list_of_while_blocks.length; i++) {
         var while_block = list_of_while_blocks[i];
+        // This is where the fix_it_boolean block is used
         var fixBlock = workspace.newBlock("fix_it_boolean");
         while_block
           .getInput("BOOL")
