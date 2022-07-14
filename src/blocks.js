@@ -196,3 +196,102 @@ export var sensing_askandwait_block = new UpgradableBlock(
   array_of_definition,
   array_of_generator
 );
+
+name = "controls_whileUntil";
+
+array_of_definition = [
+  {
+    type: "controls_whileUntil",
+    colour: "#FFAB19",
+    message0: "repeat until %1",
+    args0: [
+      {
+        type: "input_value",
+        name: "BOOL",
+        check: "Boolean",
+      },
+    ],
+    message1: "%1",
+    args1: [
+      {
+        type: "input_statement",
+        name: "DO",
+      },
+    ],
+    previousStatement: null,
+    nextStatement: null,
+    helpUrl: "%{BKY_CONTROLS_WHILEUNTIL_HELPURL}",
+    extensions: ["controls_whileUntil_tooltip"],
+  },
+  {
+    type: "controls_whileUntil",
+    colour: "#FFAB19",
+    message0: "while %1",
+    args0: [
+      {
+        type: "input_value",
+        name: "BOOL",
+        check: "Boolean",
+      },
+    ],
+    message1: "%1",
+    args1: [
+      {
+        type: "input_statement",
+        name: "DO",
+      },
+    ],
+    previousStatement: null,
+    nextStatement: null,
+    helpUrl: "%{BKY_CONTROLS_WHILEUNTIL_HELPURL}",
+    extensions: ["controls_whileUntil_tooltip"],
+  },
+];
+
+array_of_generator = [
+  function (block) {
+    // Do while/until loop.
+    const until = true;
+    let argument0 =
+      Blockly.JavaScript.valueToCode(
+        block,
+        "BOOL",
+        until
+          ? Blockly.JavaScript.ORDER_LOGICAL_NOT
+          : Blockly.JavaScript.ORDER_NONE
+      ) || "false";
+    let branch = Blockly.JavaScript.statementToCode(block, "DO");
+    branch = Blockly.JavaScript.addLoopTrap(branch, block);
+    branch += "// in_loop";
+    if (until) {
+      argument0 = "!" + argument0;
+    }
+    return "while (" + argument0 + ") {\n" + branch + "}\n";
+  },
+
+  function (block) {
+    // Do while/until loop.
+    const until = false;
+    let argument0 =
+      Blockly.JavaScript.valueToCode(
+        block,
+        "BOOL",
+        until
+          ? Blockly.JavaScript.ORDER_LOGICAL_NOT
+          : Blockly.JavaScript.ORDER_NONE
+      ) || "false";
+    let branch = Blockly.JavaScript.statementToCode(block, "DO");
+    branch = Blockly.JavaScript.addLoopTrap(branch, block);
+    branch += "// in_loop";
+    if (until) {
+      argument0 = "!" + argument0;
+    }
+    return "while (" + argument0 + ") {\n" + branch + "}\n";
+  },
+];
+
+export var controls_whileUntil_block = new UpgradableBlock(
+  name,
+  array_of_definition,
+  array_of_generator
+);

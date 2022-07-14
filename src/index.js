@@ -28,7 +28,11 @@ import { inputoutput } from "./inputoutput.js";
 import { operator } from "./operator.js";
 import { toolbox, helperToolbox } from "./toolbox.js";
 import { variables } from "./variables.js";
-import { text_print_block, sensing_askandwait_block } from "./blocks.js";
+import {
+  text_print_block,
+  sensing_askandwait_block,
+  controls_whileUntil_block,
+} from "./blocks.js";
 
 function simplifiedUpdateToolbox(workspace) {
   // helper function to refresh toolbox and workspace
@@ -357,7 +361,24 @@ document.addEventListener("DOMContentLoaded", function () {
   // while upgrade
   document.getElementById("while_upgrade").addEventListener("change", () => {
     if (document.getElementById("while_upgrade").checked) {
-      // to do
+      const list_of_while_blocks = workspace.getBlocksByType(
+        "controls_whileUntil"
+      );
+
+      controls_whileUntil_block.upgrade();
+      Blockly.defineBlocksWithJsonArray([
+        controls_whileUntil_block.getBlockDefinition(),
+      ]);
+      Blockly.JavaScript["controls_whileUntil"] =
+        controls_whileUntil_block.getBlockGenerator();
+      for (var i = 0; i < list_of_while_blocks.length; i++) {
+        var while_block = list_of_while_blocks[i];
+        var fixBlock = workspace.newBlock("fix_it_boolean");
+        while_block
+          .getInput("BOOL")
+          .connection.connect(fixBlock.outputConnection);
+      }
+      simplifiedUpdateToolbox(workspace);
     } else {
       // to do
     }

@@ -69,7 +69,7 @@ export var inputoutput = [
     args0: [
       {
         type: "input_value",
-        name: "TEXT",
+        name: "BOOL",
         check: "Boolean",
       },
     ],
