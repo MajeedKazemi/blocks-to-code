@@ -14,11 +14,11 @@ export var event = [
         alt: "flag",
       },
     ],
-    //style: "hat_blocks",
-    style: {
-      hat: "cap",
-    },
-    colour: "#FFBF00",
+    style: "hat_blocks",
+    //style: {
+    //  hat: "cap",
+    //},
+    //colour: "#FFBF00",
     nextStatement: null,
   },
 ];
