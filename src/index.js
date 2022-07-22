@@ -292,6 +292,15 @@ document.addEventListener("DOMContentLoaded", function () {
       // log the code that is run
       console.log(clean_code);
 
+      var type_check_re = /\/\/throw_type_error\n(.*);/;
+      var closing_parenthesis = clean_code.match(type_check_re)[1];
+
+      clean_code = clean_code.replace(
+        "//throw_type_error\n" + closing_parenthesis + ";",
+        closing_parenthesis + ";\nreturn;"
+      );
+      console.log(clean_code);
+
       // run the code
       eval("(async () => {" + clean_code + "})()");
     }

@@ -834,5 +834,9 @@ Blockly.JavaScript["type_toint"] = function (block) {
       "VALUE",
       Blockly.JavaScript.ORDER_MEMBER
     ) || "''";
-  return ["parseInt(" + text + ")", Blockly.JavaScript.ORDER_MEMBER];
+  if (isNaN(parseInt(text))) {
+    return ["NaN\n//throw_type_error\n", Blockly.JavaScript.ORDER_MEMBER];
+  } else {
+    return ["parseInt(" + text + ")", Blockly.JavaScript.ORDER_MEMBER];
+  }
 };
