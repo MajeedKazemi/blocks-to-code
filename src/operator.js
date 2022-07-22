@@ -834,10 +834,15 @@ Blockly.JavaScript["type_toint"] = function (block) {
       "VALUE",
       Blockly.JavaScript.ORDER_MEMBER
     ) || "''";
-  console.log(block);
-  console.log(block.id);
-  console.log(Blockly.getMainWorkspace().getBlockById(block.id));
+  //console.log(block);
+  //console.log(block.id);
+  //console.log(Blockly.getMainWorkspace().getBlockById(block.id));
   if (isNaN(parseInt(text))) {
+    var fixBlock = Blockly.getMainWorkspace().newBlock("fix_it_value");
+    block.getInput("VALUE").connection.connect(fixBlock.outputConnection);
+
+    fixBlock.initSvg();
+    fixBlock.render();
     return ["NaN\n//throw_type_error\n", Blockly.JavaScript.ORDER_MEMBER];
   } else {
     return ["parseInt(" + text + ")", Blockly.JavaScript.ORDER_MEMBER];
