@@ -843,6 +843,13 @@ Blockly.JavaScript["type_toint"] = function (block) {
 
     fixBlock.initSvg();
     fixBlock.render();
+
+    var a_newText = Blockly.getMainWorkspace().newBlock("text");
+    a_newText.setFieldValue(text.replaceAll("'", ""), "TEXT");
+    a_newText.initSvg();
+    a_newText.render();
+    a_newText.outputConnection.connect(fixBlock.getInput("VALUE").connection);
+
     return ["NaN\n//throw_type_error\n", Blockly.JavaScript.ORDER_MEMBER];
   } else {
     return ["parseInt(" + text + ")", Blockly.JavaScript.ORDER_MEMBER];
