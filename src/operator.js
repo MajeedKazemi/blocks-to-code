@@ -834,6 +834,9 @@ Blockly.JavaScript["type_toint"] = function (block) {
       "VALUE",
       Blockly.JavaScript.ORDER_MEMBER
     ) || "''";
+  console.log(block);
+  console.log(block.id);
+  console.log(Blockly.getMainWorkspace().getBlockById(block.id));
   if (isNaN(parseInt(text))) {
     return ["NaN\n//throw_type_error\n", Blockly.JavaScript.ORDER_MEMBER];
   } else {
