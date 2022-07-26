@@ -26,13 +26,19 @@ import { control } from "./control.js";
 import { event } from "./event.js";
 import { inputoutput } from "./inputoutput.js";
 import { operator } from "./operator.js";
-import { toolbox, helperToolbox } from "./toolbox.js";
+import { toolbox, helperToolbox, toolbox_text } from "./toolbox.js";
 import { variables } from "./variables.js";
 import {
   text_print_block,
   sensing_askandwait_block,
   controls_whileUntil_block,
 } from "./blocks.js";
+
+Blockly.defineBlocksWithJsonArray(control);
+Blockly.defineBlocksWithJsonArray(variables);
+Blockly.defineBlocksWithJsonArray(inputoutput);
+Blockly.defineBlocksWithJsonArray(operator);
+Blockly.defineBlocksWithJsonArray(event);
 
 //asdf
 
@@ -127,8 +133,9 @@ function removeTypeCheckInDefinition(json_array) {
   }
   return output_json_array;
 }
+
 //asdf
-function simplifiedUpdateToolbox(workspace) {
+function simplifiedUpdateToolbox(workspace, toolbox) {
   // helper function to refresh toolbox and workspace
 
   // save all variables before resetting toolbox & workspace
@@ -373,7 +380,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // update toolbox & workspace
-    simplifiedUpdateToolbox(workspace);
+    simplifiedUpdateToolbox(workspace, toolbox);
   });
 
   // input upgrade
@@ -457,7 +464,7 @@ document.addEventListener("DOMContentLoaded", function () {
       for (var i = 0; i < list_of_answer_blocks.length; i++) {
         list_of_answer_blocks[i].dispose(false);
       }
-      simplifiedUpdateToolbox(workspace);
+      simplifiedUpdateToolbox(workspace, toolbox);
     } else {
       // original
       alert("Please don't attempt to uncheck this... It's too much work!");
@@ -486,7 +493,7 @@ document.addEventListener("DOMContentLoaded", function () {
           .getInput("BOOL")
           .connection.connect(fixBlock.outputConnection);
       }
-      simplifiedUpdateToolbox(workspace);
+      simplifiedUpdateToolbox(workspace, toolbox);
     } else {
       // original
       alert("Please don't attempt to uncheck this... It's too much work!");
@@ -503,25 +510,25 @@ document.addEventListener("DOMContentLoaded", function () {
       // remove
       toolbox.contents[2].contents.splice(2, 1);
     }
-    simplifiedUpdateToolbox(workspace);
+    simplifiedUpdateToolbox(workspace, toolbox);
   });
 
   document.getElementById("type_upgrade").addEventListener("change", () => {
     if (document.getElementById("type_upgrade").checked) {
       // add
 
-      var controlN = removeTypeCheckInDefinition(control);
+      //var controlN = removeTypeCheckInDefinition(control);
       var variablesN = removeTypeCheckInDefinition(variables);
       var inputoutputN = removeTypeCheckInDefinition(inputoutput);
       var operatorN = removeTypeCheckInDefinition(operator);
-      console.log(operatorN);
       var eventN = removeTypeCheckInDefinition(event);
-      Blockly.defineBlocksWithJsonArray(controlN);
+      console.log(operatorN);
+      //Blockly.defineBlocksWithJsonArray(controlN);
       Blockly.defineBlocksWithJsonArray(variablesN);
       Blockly.defineBlocksWithJsonArray(inputoutputN);
       Blockly.defineBlocksWithJsonArray(operatorN);
       Blockly.defineBlocksWithJsonArray(eventN);
-      simplifiedUpdateToolbox(workspace);
+      simplifiedUpdateToolbox(workspace, toolbox_text);
     } else {
       // original
       alert("Please don't attempt to uncheck this... It's too much work!");
@@ -529,12 +536,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
-
-Blockly.defineBlocksWithJsonArray(control);
-Blockly.defineBlocksWithJsonArray(variables);
-Blockly.defineBlocksWithJsonArray(inputoutput);
-Blockly.defineBlocksWithJsonArray(operator);
-Blockly.defineBlocksWithJsonArray(event);
 
 /**
  * the getValueFromUserInput() function is called within the `sensing_askandwait` block
