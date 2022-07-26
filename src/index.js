@@ -293,7 +293,9 @@ document.addEventListener("DOMContentLoaded", function () {
       console.log(clean_code);
 
       var type_check_re = /\/\/throw_type_error\n(.*);/;
-      var closing_parenthesis = clean_code.match(type_check_re)[1];
+      var closing_parenthesis = clean_code.match(type_check_re);
+      if (closing_parenthesis) closing_parenthesis = closing_parenthesis[1];
+      else closing_parenthesis = "";
 
       clean_code = clean_code.replace(
         "//throw_type_error\n" + closing_parenthesis + ";",

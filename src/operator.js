@@ -834,10 +834,14 @@ Blockly.JavaScript["type_toint"] = function (block) {
       "VALUE",
       Blockly.JavaScript.ORDER_MEMBER
     ) || "''";
+  var clean_text = text.replaceAll("'", "");
+  console.log(clean_text);
+  console.log(parseInt(clean_text));
   //console.log(block);
   //console.log(block.id);
   //console.log(Blockly.getMainWorkspace().getBlockById(block.id));
-  if (isNaN(parseInt(text))) {
+  if (isNaN(parseInt(clean_text))) {
+    console.log("good");
     var fixBlock = Blockly.getMainWorkspace().newBlock("fix_it_value");
     block.getInput("VALUE").connection.connect(fixBlock.outputConnection);
 
@@ -845,13 +849,13 @@ Blockly.JavaScript["type_toint"] = function (block) {
     fixBlock.render();
 
     var a_newText = Blockly.getMainWorkspace().newBlock("text");
-    a_newText.setFieldValue(text.replaceAll("'", ""), "TEXT");
+    a_newText.setFieldValue(clean_text, "TEXT");
     a_newText.initSvg();
     a_newText.render();
     a_newText.outputConnection.connect(fixBlock.getInput("VALUE").connection);
 
     return ["NaN\n//throw_type_error\n", Blockly.JavaScript.ORDER_MEMBER];
   } else {
-    return ["parseInt(" + text + ")", Blockly.JavaScript.ORDER_MEMBER];
+    return ["parseInt(" + clean_text + ")", Blockly.JavaScript.ORDER_MEMBER];
   }
 };
