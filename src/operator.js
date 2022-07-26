@@ -835,13 +835,10 @@ Blockly.JavaScript["type_toint"] = function (block) {
       Blockly.JavaScript.ORDER_MEMBER
     ) || "''";
   var clean_text = text.replaceAll("'", "");
-  console.log(clean_text);
-  console.log(parseInt(clean_text));
   //console.log(block);
   //console.log(block.id);
   //console.log(Blockly.getMainWorkspace().getBlockById(block.id));
-  if (isNaN(parseInt(clean_text))) {
-    console.log("good");
+  if (isNaN(Number(clean_text))) {
     var fixBlock = Blockly.getMainWorkspace().newBlock("fix_it_value");
     block.getInput("VALUE").connection.connect(fixBlock.outputConnection);
 
