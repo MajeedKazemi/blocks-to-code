@@ -109,6 +109,24 @@ const categoryStyles = {
  */
 const Zelos2 = new Blockly.Theme("zelos2", defaultBlockStyles, categoryStyles);
 
+function removeTypeCheckInDefinition(json_array) {
+  var output_json_array = [];
+
+  for (var i = 0; i < json_array.length; i++) {
+    output_json_array.push(json_array[i]);
+    var arg_index = 0;
+    var arg_name = "args" + arg_index;
+
+    while (output_json_array[i][arg_name] != undefined) {
+      for (var j = 0; j < output_json_array[i][arg_name].length; j++) {
+        delete output_json_array[i][arg_name][j]["check"];
+      }
+      arg_index++;
+      var arg_name = "args" + arg_index;
+    }
+  }
+  return output_json_array;
+}
 //asdf
 function simplifiedUpdateToolbox(workspace) {
   // helper function to refresh toolbox and workspace
@@ -486,6 +504,29 @@ document.addEventListener("DOMContentLoaded", function () {
       toolbox.contents[2].contents.splice(2, 1);
     }
     simplifiedUpdateToolbox(workspace);
+  });
+
+  document.getElementById("type_upgrade").addEventListener("change", () => {
+    if (document.getElementById("type_upgrade").checked) {
+      // add
+
+      var controlN = removeTypeCheckInDefinition(control);
+      var variablesN = removeTypeCheckInDefinition(variables);
+      var inputoutputN = removeTypeCheckInDefinition(inputoutput);
+      var operatorN = removeTypeCheckInDefinition(operator);
+      console.log(operatorN);
+      var eventN = removeTypeCheckInDefinition(event);
+      Blockly.defineBlocksWithJsonArray(controlN);
+      Blockly.defineBlocksWithJsonArray(variablesN);
+      Blockly.defineBlocksWithJsonArray(inputoutputN);
+      Blockly.defineBlocksWithJsonArray(operatorN);
+      Blockly.defineBlocksWithJsonArray(eventN);
+      simplifiedUpdateToolbox(workspace);
+    } else {
+      // original
+      alert("Please don't attempt to uncheck this... It's too much work!");
+      document.getElementById("type_upgrade").checked = true;
+    }
   });
 });
 
