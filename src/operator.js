@@ -821,9 +821,13 @@ Blockly.JavaScript["type_tostring"] = function (block) {
       "VALUE",
       Blockly.JavaScript.ORDER_MEMBER
     ) || "''";
+  var clean_text = text.replaceAll("'", "");
   // note: toString() does not work for 100.toString()
 
-  return ["'" + text + "'" + ".toString()", Blockly.JavaScript.ORDER_MEMBER];
+  return [
+    "'" + clean_text + "'" + ".toString()",
+    Blockly.JavaScript.ORDER_MEMBER,
+  ];
 };
 
 Blockly.JavaScript["type_toint"] = function (block) {
