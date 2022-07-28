@@ -409,6 +409,11 @@ Blockly.JavaScript["math_subtract"] = function (block) {
   const order = Blockly.JavaScript.ORDER_SUBTRACTION;
   const argument0 = Blockly.JavaScript.valueToCode(block, "A", order) || "0";
   const argument1 = Blockly.JavaScript.valueToCode(block, "B", order) || "0";
+  if (isNaN(Number(argument0)) || isNaN(Number(argument1))) {
+    // throw exception
+    console.log("bad");
+    return;
+  }
   let code;
   code = argument0 + operator + argument1;
   return [code, order];
@@ -419,6 +424,11 @@ Blockly.JavaScript["math_multiply"] = function (block) {
   const order = Blockly.JavaScript.ORDER_MULTIPLICATION;
   const argument0 = Blockly.JavaScript.valueToCode(block, "A", order) || "0";
   const argument1 = Blockly.JavaScript.valueToCode(block, "B", order) || "0";
+  if (isNaN(Number(argument0)) && isNaN(Number(argument1))) {
+    // throw exception
+    console.log("bad");
+    return;
+  }
   let code;
   code = argument0 + operator + argument1;
   return [code, order];
@@ -429,6 +439,11 @@ Blockly.JavaScript["math_divide"] = function (block) {
   const order = Blockly.JavaScript.ORDER_DIVISION;
   const argument0 = Blockly.JavaScript.valueToCode(block, "A", order) || "0";
   const argument1 = Blockly.JavaScript.valueToCode(block, "B", order) || "0";
+  if (isNaN(Number(argument0)) || isNaN(Number(argument1))) {
+    // throw exception
+    console.log("bad");
+    return;
+  }
   let code;
   code = argument0 + operator + argument1;
   return [code, order];
@@ -442,6 +457,11 @@ Blockly.JavaScript["math_random"] = function (block) {
   const argument1 =
     Blockly.JavaScript.valueToCode(block, "B", Blockly.JavaScript.ORDER_NONE) ||
     "0";
+  if (isNaN(Number(argument0)) || isNaN(Number(argument1))) {
+    // throw exception
+    console.log("bad");
+    return;
+  }
   const functionName = Blockly.JavaScript.provideFunction_(
     "mathRandomInt",
     `
@@ -611,6 +631,11 @@ Blockly.JavaScript["text_charAt"] = function (block) {
       "A",
       Blockly.JavaScript.ORDER_MEMBER
     ) || "1";
+  if (isNaN(Number(where))) {
+    // throw exception
+    console.log("bad");
+    return;
+  }
   const textOrder =
     where === "RANDOM"
       ? Blockly.JavaScript.ORDER_NONE
